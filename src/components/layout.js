@@ -15,6 +15,24 @@ const Layout = ({ isHomePage, children }) => {
           description
         }
       }
+      wpPage {
+        id
+        link
+        title
+        featuredImage {
+          node {
+            mediaItemUrl
+            altText
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 1000, quality: 100) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
+              }
+            }
+          }
+        }
+      }
     }
   `)
 
