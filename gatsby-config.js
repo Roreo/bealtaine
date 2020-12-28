@@ -62,7 +62,11 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
+<<<<<<< Updated upstream
         icon: `content/assets/gatsby-icon.png`,
+=======
+        icon: `content/assets/Bdark.png`,
+>>>>>>> Stashed changes
       },
     },
 
