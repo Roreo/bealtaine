@@ -120,6 +120,9 @@ const Layout = ({ isHomePage, children }) => {
     display: block;
     height: 500px;
     margin-bottom: 50px;
+    @media (max-width: 768px) {
+      height: 300px;
+    }
 
     img {
     }
@@ -181,11 +184,9 @@ const Layout = ({ isHomePage, children }) => {
 
   const hierarchicalList = flatListToHierarchical(menu.nodes[0].menuItems.nodes)
 
-  console.log(hierarchicalList)
-
   const menuList = hierarchicalList.map(item => {
     return item.children ? (
-      <li>
+      <li key={item.url}>
         <a href={item.url}>{item.title}</a>
         <ul>
           {item.children.map(x => (
@@ -203,14 +204,14 @@ const Layout = ({ isHomePage, children }) => {
   })
 
   const heroPosts = tpLog.map(post => (
-    <SwiperSlide key={post.node.slug} style={{ height: 500 }}>
+    <SwiperSlide key={post.node.slug} className="swiper-custom-slide">
       <a className="hero-link" href={post.node.uri}>
         <Image
           fluid={post.node.featuredImage.node.localFile.childImageSharp.fluid}
           alt={post.node.featuredImage.node.altText}
+          className="gatsby-hero-image"
           style={{
             position: "absolute",
-            height: 500,
             width: "100vw",
             zIndex: -1,
           }}
@@ -243,7 +244,6 @@ const Layout = ({ isHomePage, children }) => {
   return (
     <div className="global-wrapper" data-is-root-path={isHomePage}>
       <Drawer
-        width="20vw"
         handler={false}
         open={open}
         onClose={openMenu}
@@ -341,6 +341,7 @@ const Layout = ({ isHomePage, children }) => {
               autoplay={{ delay: 6000 }}
               loop={true}
               navigation
+              className="swiper-custom"
               pagination={{ clickable: true }}
             >
               {heroPosts}
