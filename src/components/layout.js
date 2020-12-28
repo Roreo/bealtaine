@@ -10,11 +10,8 @@ import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 import Drawer from "rc-drawer"
 import "rc-drawer/assets/index.css"
-
 // Import Swiper styles
 import "swiper/swiper.min.css"
-import "swiper/components/navigation/navigation.min.css"
-import "swiper/components/pagination/pagination.min.css"
 import {
   FiMenu,
   FiInstagram,
