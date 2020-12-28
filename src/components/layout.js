@@ -18,6 +18,7 @@ import {
   FiTwitter,
   FiYoutube,
   FiFacebook,
+  FiChevronRight,
 } from "react-icons/fi"
 
 // install Swiper components
@@ -184,11 +185,22 @@ const Layout = ({ isHomePage, children }) => {
 
   const hierarchicalList = flatListToHierarchical(menu.nodes[0].menuItems.nodes)
 
+  const openDropdown = key => {
+    document.getElementById(key).classList.toggle("open-sesame")
+    document.getElementsByClassName(key)[0].classList.toggle("chevron-turn")
+  }
+
   const menuList = hierarchicalList.map(item => {
-    return item.children ? (
-      <li key={item.url}>
-        <a href={item.url}>{item.title}</a>
-        <ul>
+    return item.children.length ? (
+      <li className="bealtaine-menu-item" key={item.key}>
+        <a className="menu-link-dropdown" href={item.url}>
+          {item.title}
+        </a>
+        <FiChevronRight
+          className={`dropdown-icon ` + item.key}
+          onClick={() => openDropdown(item.key)}
+        />
+        <ul className="dropdown-menu" id={item.key}>
           {item.children.map(x => (
             <li className="dropdown-item" key={x.title}>
               <a href={x.url}>{x.title}</a>
@@ -197,8 +209,10 @@ const Layout = ({ isHomePage, children }) => {
         </ul>
       </li>
     ) : (
-      <li>
-        <a href={item.url}>{item.title}</a>
+      <li className="bealtaine-menu-item" key={item.key}>
+        <a className="menu-link" href={item.url}>
+          {item.title}
+        </a>
       </li>
     )
   })
@@ -268,14 +282,14 @@ const Layout = ({ isHomePage, children }) => {
               <Link to="/">{parse(title)}</Link>
             </h1> */}
           </ImageBox>
-          <ul>{menuList}</ul>
+          <ul className="bealtaine-menu">{menuList}</ul>
         </MenuFiller>
       </Drawer>
       <header className="global-header">
         {isHomePage ? (
           <>
             <div className="header-left">
-              <FiMenu className="menu-icon" onClick={openMenu} />
+              <FiMenu className="menu-icon" onClick={() => openMenu()} />
             </div>
             <div className="header-center">
               <ImageBox className="logo-wrapper">
@@ -303,7 +317,7 @@ const Layout = ({ isHomePage, children }) => {
         ) : (
           <>
             <div className="header-left">
-              <FiMenu className="menu-icon" onClick={openMenu} />
+              <FiMenu className="menu-icon" onClick={() => openMenu()} />
             </div>
             <div className="header-center">
               <ImageBox className="logo-wrapper">

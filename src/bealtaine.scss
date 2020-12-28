@@ -1,3 +1,65 @@
+$maxWidth-none: "none";
+$maxWidth-xs: 20rem;
+$maxWidth-sm: 24rem;
+$maxWidth-md: 28rem;
+$maxWidth-lg: 32rem;
+$maxWidth-xl: 36rem;
+$maxWidth-2xl: 42rem;
+$maxWidth-3xl: 48rem;
+$maxWidth-4xl: 56rem;
+$maxWidth-full: "100%";
+$maxWidth-wrapper: var($maxWidth-4xl);
+$spacing-px: "1px";
+$spacing-0: 0;
+$spacing-1: 0.25rem;
+$spacing-2: 0.5rem;
+$spacing-3: 0.75rem;
+$spacing-4: 1rem;
+$spacing-5: 1.25rem;
+$spacing-6: 1.5rem;
+$spacing-8: 2rem;
+$spacing-10: 2.5rem;
+$spacing-12: 3rem;
+$spacing-16: 4rem;
+$spacing-20: 5rem;
+$spacing-24: 6rem;
+$spacing-32: 8rem;
+$fontFamily-sans: "Sorts Mill Goudy", Montserrat, system-ui, -apple-system,
+  BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+  "Noto Color Emoji";
+$fontFamily-serif: "Source Sans Pro", "Merriweather", "Georgia", Cambria,
+  "Times New Roman", Times, serif;
+$font-body: var($fontFamily-serif);
+$font-heading: var($fontFamily-sans);
+$fontWeight-normal: 400;
+$fontWeight-medium: 500;
+$fontWeight-semibold: 600;
+$fontWeight-bold: 700;
+$fontWeight-extrabold: 800;
+$fontWeight-black: 900;
+$fontSize-root: 16px;
+$lineHeight-none: 1;
+$lineHeight-tight: 1.1;
+$lineHeight-normal: 1.5;
+$lineHeight-relaxed: 1.625;
+/* 1.200 Minor Third Type Scale */
+$fontSize-0: 0.833rem;
+$fontSize-1: 1rem;
+$fontSize-2: 1.2rem;
+$fontSize-3: 1.44rem;
+$fontSize-4: 1.728rem;
+$fontSize-5: 2.074rem;
+$fontSize-6: 2.488rem;
+$fontSize-7: 2.986rem;
+$color-primary: #f3b61d;
+$color-primary-light: #ffde59;
+$color-text: #10110f;
+$color-text-light: #56644d;
+$color-heading: #182212;
+$color-heading-black: black;
+$color-accent: #d1dce5;
+
 .full-width {
   margin-left: calc(-100vw / 2 + (56rem - 40px) / 2);
   margin-right: calc(-100vw / 2 + (56rem - 40px) / 2);
@@ -54,6 +116,7 @@ body.no-scroll {
   .menu-icon {
     font-size: 28px;
     margin-right: auto;
+    cursor: pointer;
   }
   .header-left,
   .header-center,
@@ -102,12 +165,12 @@ footer {
 //swiper styles
 .swiper-button-prev,
 .swiper-button-next {
-  --swiper-navigation-size: 44px;
+  $swiper-navigation-size: 44px;
   position: absolute;
   top: 50%;
-  width: calc(var(--swiper-navigation-size) / 44 * 27);
-  height: var(--swiper-navigation-size);
-  margin-top: calc(-1 * var(--swiper-navigation-size) / 2);
+  width: calc($swiper-navigation-size / 44 * 27);
+  height: $swiper-navigation-size;
+  margin-top: calc(-1 * $swiper-navigation-size / 2);
   z-index: 10;
   cursor: pointer;
   display: flex;
@@ -120,7 +183,7 @@ footer {
   }
   &:after {
     font-family: swiper-icons;
-    font-size: var(--swiper-navigation-size);
+    font-size: $swiper-navigation-size;
     text-transform: none !important;
     letter-spacing: 0;
     text-transform: none;
@@ -255,4 +318,77 @@ footer {
 }
 .swiper-pagination-lock {
   display: none;
+}
+
+//bealtaine menu
+.bealtaine-menu {
+  list-style: none;
+  .bealtaine-menu-item {
+    padding: 0px 15px;
+    margin: 7px 15px;
+    margin-bottom: 0;
+    .menu-link,
+    .menu-link-dropdown {
+      padding: 10px 10px;
+      color: $color-heading;
+      text-decoration: none;
+      width: 100%;
+      display: inline-block;
+      transition: all 0.15s ease-out;
+      &:hover {
+        background: lighten($color: $color-primary-light, $amount: 20%);
+        border-radius: 10px;
+      }
+    }
+    .menu-link-dropdown {
+      width: 80%;
+    }
+    .dropdown-icon {
+      margin-bottom: -15px;
+      font-size: 45px;
+      padding: 5px;
+      border-radius: 10px;
+      border: 4px solid lighten($color: $color-primary-light, $amount: 20%);
+      margin-left: 5px;
+      transition: all 0.15s ease-out;
+      &:hover {
+        background: lighten($color: $color-primary-light, $amount: 20%);
+        cursor: pointer;
+      }
+      &.chevron-turn {
+        transform: rotate(90deg);
+      }
+    }
+
+    .dropdown-menu {
+      list-style: none;
+      display: block;
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+      transition: all 0.25s ease-out;
+      margin-top: 0;
+      margin-bottom: 0;
+      .dropdown-item {
+        margin-bottom: 0;
+        a {
+          padding: 10px 10px;
+          color: $color-heading;
+          text-decoration: none;
+          width: 100%;
+          display: inline-block;
+          transition: all 0.15s ease-out;
+          &:hover {
+            background: lighten($color: $color-primary-light, $amount: 20%);
+            border-radius: 10px;
+          }
+        }
+      }
+      &.open-sesame {
+        opacity: 1;
+        height: auto;
+        margin-bottom: 15px;
+      }
+    }
+  }
 }
