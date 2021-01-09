@@ -41,8 +41,12 @@ const Layout = ({ isHomePage, children }) => {
         }
       }
       file(
-        url: {
-          eq: "https://wp.roryo.co/wp-content/uploads/2021/01/bealtaine.png"
+        childImageSharp: {
+          fluid: {
+            src: {
+              eq: "/static/df9eecdca687be05396bf243d4e07861/ee604/bealtaine.png"
+            }
+          }
         }
       ) {
         childImageSharp {
