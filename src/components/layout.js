@@ -29,7 +29,7 @@ const Layout = ({ isHomePage, children }) => {
     // wp: {
     //   generalSettings: { title },
     // },
-    logo,
+    file,
     topPosts,
     menu,
   } = useStaticQuery(graphql`
@@ -40,7 +40,7 @@ const Layout = ({ isHomePage, children }) => {
           description
         }
       }
-      logo: file(name: { eq: "bealtaine" }) {
+      file(name: { eq: "bealtaine" }) {
         childImageSharp {
           fluid(maxWidth: 1000, quality: 100) {
             src
@@ -260,7 +260,7 @@ const Layout = ({ isHomePage, children }) => {
       <main>
         <CoverImage>
           <Image
-            fluid={logo.childImageSharp.fluid}
+            fluid={file.childImageSharp.fluid}
             style={{
               position: "absolute",
               width: "500px",
