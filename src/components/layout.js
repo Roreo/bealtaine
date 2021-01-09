@@ -40,9 +40,9 @@ const Layout = ({ isHomePage, children }) => {
           description
         }
       }
-      logo: file(relativePath: { eq: "Bdark.png" }) {
+      logo: file(name: { eq: "bealtaine" }) {
         childImageSharp {
-          fluid(maxWidth: 200, quality: 100) {
+          fluid(maxWidth: 1000, quality: 100) {
             src
           }
         }
@@ -145,6 +145,24 @@ const Layout = ({ isHomePage, children }) => {
     }
   `
 
+  const CoverImage = styled.section`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+
+    img {
+      display: block;
+      width: 1000;
+      height: auto;
+    }
+  `
+
   const tpLog = topPosts.edges
 
   const flatListToHierarchical = (
@@ -239,121 +257,19 @@ const Layout = ({ isHomePage, children }) => {
 
   return (
     <div className="global-wrapper" data-is-root-path={isHomePage}>
-      <Drawer
-        handler={false}
-        open={open}
-        onClose={openMenu}
-        duration=".3s"
-        className="menu-drawer"
-      >
-        <MenuFiller>
-          <ImageBox>
-            <Link to="/">
-              <Image
-                fluid={logo.childImageSharp.fluid}
-                alt={logo.childImageSharp.alt}
-                style={{
-                  height: 35,
-                  width: 35,
-                  marginBottom: 25,
-                  marginTop: 25,
-                }}
-              />
-            </Link>
-            {/* <h1 className="main-heading">
-              <Link to="/">{parse(title)}</Link>
-            </h1> */}
-          </ImageBox>
-          <ul className="bealtaine-menu">{menuList}</ul>
-        </MenuFiller>
-      </Drawer>
-      <header className="global-header">
-        {isHomePage ? (
-          <>
-            <div className="header-left">
-              <FiMenu className="menu-icon" onClick={() => openMenu()} />
-            </div>
-            <div className="header-center">
-              <ImageBox className="logo-wrapper">
-                <Link to="/">
-                  <Image
-                    fluid={logo.childImageSharp.fluid}
-                    alt={logo.childImageSharp.alt}
-                    style={{ height: 60, width: 60 }}
-                  />
-                </Link>
-                {/* <h1 className="main-heading">
-              <Link to="/">{parse(title)}</Link>
-            </h1> */}
-              </ImageBox>
-            </div>
-            <div className="header-right">
-              <Socials className="social-box">
-                <FiInstagram className="social-icon" />
-                <FiTwitter className="social-icon" />
-                <FiYoutube className="social-icon" />
-                <FiFacebook className="social-icon" />
-              </Socials>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="header-left">
-              <FiMenu className="menu-icon" onClick={() => openMenu()} />
-            </div>
-            <div className="header-center">
-              <ImageBox className="logo-wrapper">
-                <Link to="/">
-                  <Image
-                    fluid={logo.childImageSharp.fluid}
-                    alt={logo.childImageSharp.alt}
-                    style={{ height: 60, width: 60 }}
-                  />
-                </Link>
-                {/* <h1 className="main-heading">
-              <Link to="/">{parse(title)}</Link>
-            </h1> */}
-              </ImageBox>
-            </div>
-            <div className="header-right">
-              <Socials className="social-box">
-                <FiInstagram className="social-icon" />
-                <FiTwitter className="social-icon" />
-                <FiYoutube className="social-icon" />
-                <FiFacebook className="social-icon" />
-              </Socials>
-            </div>
-          </>
-        )}
-      </header>
-
       <main>
-        {isHomePage ? (
-          <Hero className="full-width">
-            <Swiper
-              slidesPerView={1}
-              height={500}
-              speed={300}
-              autoplay={{ delay: 6000 }}
-              loop={true}
-              navigation
-              className="swiper-custom"
-              pagination={{ clickable: true }}
-            >
-              {heroPosts}
-            </Swiper>
-          </Hero>
-        ) : null}
-        {children}
+        <CoverImage>
+          <Image
+            fluid={logo.childImageSharp.fluid}
+            style={{
+              position: "absolute",
+              width: "500px",
+              height: "250px",
+              zIndex: -1,
+            }}
+          />
+        </CoverImage>
       </main>
-
-      <footer>
-        © {new Date().getFullYear()}, built in Brooklyn, with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-        {` `}
-        and <a href="https://wordpress.org/">WordPress</a>
-      </footer>
     </div>
   )
 }
