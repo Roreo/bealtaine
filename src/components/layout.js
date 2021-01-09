@@ -40,7 +40,11 @@ const Layout = ({ isHomePage, children }) => {
           description
         }
       }
-      file(name: { eq: "bealtaine" }) {
+      file(
+        url: {
+          eq: "https://wp.roryo.co/wp-content/uploads/2021/01/bealtaine.png"
+        }
+      ) {
         childImageSharp {
           fluid(maxWidth: 1000, quality: 100) {
             src
