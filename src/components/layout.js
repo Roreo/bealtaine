@@ -40,27 +40,9 @@ const Layout = ({ isHomePage, children }) => {
           description
         }
       }
-      wpPage {
-        id
-        link
-        title
-        featuredImage {
-          node {
-            mediaItemUrl
-            altText
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 1000, quality: 100) {
-                  ...GatsbyImageSharpFluid_tracedSVG
-                }
-              }
-            }
-          }
-        }
-      }
       logo: file(relativePath: { eq: "Bdark.png" }) {
         childImageSharp {
-          fluid(maxWidth: 500, quality: 100) {
+          fluid(maxWidth: 200, quality: 100) {
             src
           }
         }
@@ -83,7 +65,7 @@ const Layout = ({ isHomePage, children }) => {
                 altText
                 localFile {
                   childImageSharp {
-                    fluid(maxWidth: 2048, quality: 100) {
+                    fluid(maxWidth: 1800, quality: 70) {
                       src
                     }
                   }

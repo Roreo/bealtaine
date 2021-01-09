@@ -15,7 +15,7 @@ const BlogIndex = ({
   if (!posts.length) {
     return (
       <Layout isHomePage>
-        <SEO title="All posts" />
+        <SEO title="Home" />
         {/* <Bio /> */}
         <p>
           No blog posts found. Add posts to your WordPress site and they'll
@@ -27,7 +27,7 @@ const BlogIndex = ({
 
   return (
     <Layout isHomePage>
-      <SEO title="All posts" />
+      <SEO title="Home" />
 
       {/* <Bio /> */}
 
@@ -101,7 +101,7 @@ export const pageQuery = graphql`
             altText
             localFile {
               childImageSharp {
-                fluid(maxWidth: 1000, quality: 100) {
+                fluid(maxWidth: 600, quality: 80) {
                   ...GatsbyImageSharpFluid_tracedSVG
                 }
               }
