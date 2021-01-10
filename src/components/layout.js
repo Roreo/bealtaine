@@ -40,15 +40,7 @@ const Layout = ({ isHomePage, children }) => {
           description
         }
       }
-      file(
-        childImageSharp: {
-          fluid: {
-            src: {
-              eq: "/static/df9eecdca687be05396bf243d4e07861/ee604/bealtaine.png"
-            }
-          }
-        }
-      ) {
+      file(name: { eq: "logov2" }) {
         childImageSharp {
           fluid(maxWidth: 1000, quality: 100) {
             src
