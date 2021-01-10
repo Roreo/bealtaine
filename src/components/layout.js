@@ -40,7 +40,7 @@ const Layout = ({ isHomePage, children }) => {
           description
         }
       }
-      file(name: { eq: "logov2" }) {
+      file(name: { eq: "john-towner-3Kv48NS4WUU-unsplash" }) {
         childImageSharp {
           fluid(maxWidth: 1000, quality: 100) {
             src
