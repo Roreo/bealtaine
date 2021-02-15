@@ -30,6 +30,7 @@ const Layout = ({ isHomePage, children }) => {
     //   generalSettings: { title },
     // },
     logo,
+    home_logo,
     topPosts,
     menu,
   } = useStaticQuery(graphql`
@@ -43,6 +44,13 @@ const Layout = ({ isHomePage, children }) => {
       logo: file(relativePath: { eq: "Bdark.png" }) {
         childImageSharp {
           fluid(maxWidth: 200, quality: 100) {
+            src
+          }
+        }
+      }
+      home_logo: file(relativePath: { eq: "bealtaine_home.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 700, quality: 100) {
             src
           }
         }
@@ -140,8 +148,9 @@ const Layout = ({ isHomePage, children }) => {
     justify-content: center;
 
     .social-icon {
-      font-size: 22px;
+      font-size: 28px;
       margin: 0px 5px;
+      color: #182212;
     }
   `
 
@@ -253,8 +262,8 @@ const Layout = ({ isHomePage, children }) => {
                 fluid={logo.childImageSharp.fluid}
                 alt={logo.childImageSharp.alt}
                 style={{
-                  height: 35,
-                  width: 35,
+                  height: 60,
+                  width: 60,
                   marginBottom: 25,
                   marginTop: 25,
                 }}
@@ -277,9 +286,9 @@ const Layout = ({ isHomePage, children }) => {
               <ImageBox className="logo-wrapper">
                 <Link to="/">
                   <Image
-                    fluid={logo.childImageSharp.fluid}
-                    alt={logo.childImageSharp.alt}
-                    style={{ height: 60, width: 60 }}
+                    fluid={home_logo.childImageSharp.fluid}
+                    alt={home_logo.childImageSharp.alt}
+                    className="nav-logo"
                   />
                 </Link>
                 {/* <h1 className="main-heading">
@@ -289,10 +298,9 @@ const Layout = ({ isHomePage, children }) => {
             </div>
             <div className="header-right">
               <Socials className="social-box">
-                <FiInstagram className="social-icon" />
-                <FiTwitter className="social-icon" />
-                <FiYoutube className="social-icon" />
-                <FiFacebook className="social-icon" />
+                <Link className="social-link" rel="noopener" target="_blank" to="https://www.instagram.com/bealtainemagazine/">
+                  <FiInstagram className="social-icon" />
+                </Link>
               </Socials>
             </div>
           </>
