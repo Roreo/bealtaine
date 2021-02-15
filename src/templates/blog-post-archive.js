@@ -40,7 +40,7 @@ const BlogIndex = ({
           }
 
           return (
-            <li key={post.uri}>
+            <li className="bealtaine-article" key={post.uri}>
               <article
                 className="post-list-item"
                 itemScope
@@ -54,15 +54,21 @@ const BlogIndex = ({
                   </h2>
                   <small>{post.date}</small>
                 </header>
+                <div className="article-gradient"></div>
+                <section className="pullquote" itemProp="description">{parse(post.excerpt)}</section>
                 {/* if we have a featured image for this post let's display it */}
-                {featuredImage?.fluid && (
+                {featuredImage?.fluid ? (
                   <Image
+                    className="article-img"
                     fluid={featuredImage.fluid}
                     alt={featuredImage.alt}
                     style={{ marginBottom: 50 }}
                   />
+                ) : (
+                  <div className="article-bg">
+
+                  </div>
                 )}
-                <section itemProp="description">{parse(post.excerpt)}</section>
               </article>
             </li>
           )
