@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import parse from "html-react-parser"
 import Image from "gatsby-image"
-// import Bio from "../components/bio"
+import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -16,7 +16,7 @@ const BlogIndex = ({
     return (
       <Layout isHomePage>
         <SEO title="Home" />
-        {/* <Bio /> */}
+        <Bio />
         <p>
           No blog posts found. Add posts to your WordPress site and they'll
           appear here!
@@ -29,15 +29,20 @@ const BlogIndex = ({
     <Layout isHomePage>
       <SEO title="Home" />
 
-      {/* <Bio /> */}
+      <Bio />
 
-      <ol style={{ listStyle: `none` }}>
+      <ol className="" style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.title
           const featuredImage = {
             fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
             alt: post.featuredImage?.node?.alt || ``,
           }
+          const category = post.categories.nodes.map(cat => {
+            return (
+              <small className="post-cat">{cat.name}</small>
+            )
+          })
 
           return (
             <li className="bealtaine-article" key={post.uri}>
@@ -52,9 +57,12 @@ const BlogIndex = ({
                       <span itemProp="headline">{parse(title)}</span>
                     </Link>
                   </h2>
-                  <small>{post.date}</small>
+                  <small className="post-date">{post.date}</small>
                 </header>
-                <div className="article-gradient"></div>
+                <div className="cat-container">
+                  {category}
+                </div>
+                <div className="article-gradient" ></div>
                 <section className="pullquote" itemProp="description">{parse(post.excerpt)}</section>
                 {/* if we have a featured image for this post let's display it */}
                 {featuredImage?.fluid ? (
@@ -65,9 +73,7 @@ const BlogIndex = ({
                     style={{ marginBottom: 50 }}
                   />
                 ) : (
-                  <div className="article-bg">
-
-                  </div>
+                    <div className="article-bg" style={ post.article_bg ? {background: post.article_bg.articleBg} : null }></div>
                 )}
               </article>
             </li>
@@ -101,6 +107,14 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         excerpt
+        article_bg {
+          articleBg
+        }
+        categories {
+          nodes {
+            name
+          }
+        }
         featuredImage {
           node {
             mediaItemUrl
