@@ -8,7 +8,7 @@ $maxWidth-2xl: 42rem;
 $maxWidth-3xl: 48rem;
 $maxWidth-4xl: 56rem;
 $maxWidth-full: "100%";
-$maxWidth-wrapper: var($maxWidth-4xl);
+$maxWidth-wrapper: $maxWidth-4xl;
 $spacing-px: "1px";
 $spacing-0: 0;
 $spacing-1: 0.25rem;
@@ -30,8 +30,8 @@ $fontFamily-sans: "Sorts Mill Goudy", Montserrat, system-ui, -apple-system,
   "Noto Color Emoji";
 $fontFamily-serif: "Source Sans Pro", "Merriweather", "Georgia", Cambria,
   "Times New Roman", Times, serif;
-$font-body: var($fontFamily-serif);
-$font-heading: var($fontFamily-sans);
+$font-body: $fontFamily-serif;
+$font-heading: $fontFamily-sans;
 $fontWeight-normal: 400;
 $fontWeight-medium: 500;
 $fontWeight-semibold: 600;
@@ -54,8 +54,8 @@ $fontSize-6: 2.488rem;
 $fontSize-7: 2.986rem;
 $color-primary: #f3b61d;
 $color-primary-light: #ffde59;
-$color-gray: #D1C7BE;
-$color-green: #213B1F;
+$color-gray: #d1c7be;
+$color-green: #213b1f;
 $color-black: #182212;
 $color-white: #fff;
 $color-text: #10110f;
@@ -90,7 +90,7 @@ body {
 }
 
 body.no-scroll {
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .swiper-custom {
@@ -115,16 +115,40 @@ a.more-link {
   display: none;
 }
 
+.post-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 30px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
 //article styling (bealtaine-article)
 .bealtaine-article {
+  &:hover {
+    .article-bg {
+    }
+  }
 
   .post-list-item {
     position: relative;
+    height: 300px;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      margin-top: 10px;
+    }
   }
-  
+
   .article-gradient {
-    background: rgb(0,0,0);
-    background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.6026785714285714) 100%);
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 20%,
+      rgba(0, 0, 0, 0.6026785714285714) 100%
+    );
     height: 100%;
     width: 100%;
     position: absolute;
@@ -139,6 +163,7 @@ a.more-link {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: 100px;
 
     p {
       color: white;
@@ -146,37 +171,70 @@ a.more-link {
       font-style: italic;
       border-left: 3px solid white;
       padding-left: 15px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      overflow: hidden;
     }
   }
 
   header {
-    bottom: 20px;
-    left: 40px;
+    bottom: 10px;
+    padding: 0px 30px;
     position: absolute;
     z-index: 1;
-    
+
     h2 {
       position: relative;
       color: $color-white;
     }
 
-    small {
+    .post-date {
       color: $color-white;
     }
   }
 
-
   .article-img {
     z-index: -1;
-    border-radius: 6px
-
+    border-radius: 6px;
   }
-  
+
   .article-bg {
     z-index: -1;
     background: $color-primary;
-    height: 570px;
+    height: 300px;
     border-radius: 6px;
+
+    @media (max-width: 768px) {
+    }
+  }
+
+  .cat-container {
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+  }
+
+  .post-cat {
+    color: white;
+    z-index: 1;
+    border: 1px solid white;
+    border-radius: 6px;
+    margin: 5px 0px;
+    padding: 2px 6px;
+    font-size: 12px;
+  }
+
+  .inline-gatsby-image-wrapper,
+  .inline-gatsby-image-wrapper span {
+    height: 100% !important;
+    border-radius: 6px;
+    width: auto;
+    z-index: -1;
   }
 }
 
@@ -186,7 +244,22 @@ a.more-link {
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 0px;
+
+  .container {
+    margin: $spacing-0 auto;
+    max-width: $maxWidth-wrapper;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: $maxWidth-wrapper;
+    padding: $spacing-5;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .menu-icon {
     font-size: 28px;
     margin-right: auto;
@@ -214,8 +287,6 @@ a.more-link {
     width: 190px;
   }
 
-
-
   @media (max-width: 768px) {
     .social-icon {
       font-size: 20px;
@@ -223,7 +294,7 @@ a.more-link {
 
     .nav-logo {
       height: 30px;
-      width: 130px;
+      width: 140px;
     }
   }
 }

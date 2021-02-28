@@ -12,14 +12,7 @@ import Drawer from "rc-drawer"
 import "rc-drawer/assets/index.css"
 // Import Swiper styles
 import "swiper/swiper.min.css"
-import {
-  FiMenu,
-  FiInstagram,
-  FiTwitter,
-  FiYoutube,
-  FiFacebook,
-  FiChevronRight,
-} from "react-icons/fi"
+import { FiMenu, FiInstagram, FiChevronRight } from "react-icons/fi"
 
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Autoplay])
@@ -67,9 +60,8 @@ const Layout = ({ isHomePage, children }) => {
             slug
             top_post {
               description
-            }
-            featuredImage {
-              node {
+              customLink
+              tpImage {
                 altText
                 localFile {
                   childImageSharp {
@@ -210,10 +202,19 @@ const Layout = ({ isHomePage, children }) => {
 
   const heroPosts = tpLog.map(post => (
     <SwiperSlide key={post.node.slug} className="swiper-custom-slide">
-      <a className="hero-link" href={post.node.uri}>
+      <a
+        className="hero-link"
+        href={
+          post.node.top_post.customLink
+            ? post.node.top_post.customLink
+            : post.node.uri
+        }
+        target={post.node.top_post.customLink ? "_blank" : ""}
+        rel={post.node.top_post.customLink ? "noopener" : ""}
+      >
         <Image
-          fluid={post.node.featuredImage.node.localFile.childImageSharp.fluid}
-          alt={post.node.featuredImage.node.altText}
+          fluid={post.node.top_post.tpImage.localFile.childImageSharp.fluid}
+          alt={post.node.top_post.tpImage.altText}
           className="gatsby-hero-image"
           style={{
             position: "absolute",
@@ -239,10 +240,10 @@ const Layout = ({ isHomePage, children }) => {
   const openMenu = () => {
     if (!open) {
       setOpen(true)
-      document.body.classList.toggle("no-scroll")
+      // document.body.classList.add("no-scroll")
     } else {
       setOpen(false)
-      document.body.classList.toggle("no-scroll")
+      // document.body.classList.remove("no-scroll")
     }
   }
 
@@ -276,63 +277,85 @@ const Layout = ({ isHomePage, children }) => {
           <ul className="bealtaine-menu">{menuList}</ul>
         </MenuFiller>
       </Drawer>
-      <header className="global-header">
-        {isHomePage ? (
-          <>
-            <div className="header-left">
-              <FiMenu className="menu-icon" onClick={() => openMenu()} />
-            </div>
-            <div className="header-center">
-              <ImageBox className="logo-wrapper">
-                <Link to="/">
-                  <Image
-                    fluid={home_logo.childImageSharp.fluid}
-                    alt={home_logo.childImageSharp.alt}
-                    className="nav-logo"
-                  />
-                </Link>
-                {/* <h1 className="main-heading">
-              <Link to="/">{parse(title)}</Link>
-            </h1> */}
-              </ImageBox>
-            </div>
-            <div className="header-right">
-              <Socials className="social-box">
-                <Link className="social-link" rel="noopener" target="_blank" to="https://www.instagram.com/bealtainemagazine/">
-                  <FiInstagram className="social-icon" />
-                </Link>
-              </Socials>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="header-left">
-              <FiMenu className="menu-icon" onClick={() => openMenu()} />
-            </div>
-            <div className="header-center">
-              <ImageBox className="logo-wrapper">
-                <Link to="/">
-                  <Image
-                    fluid={logo.childImageSharp.fluid}
-                    alt={logo.childImageSharp.alt}
-                    style={{ height: 60, width: 60 }}
-                  />
-                </Link>
-                {/* <h1 className="main-heading">
-              <Link to="/">{parse(title)}</Link>
-            </h1> */}
-              </ImageBox>
-            </div>
-            <div className="header-right">
-              <Socials className="social-box">
-                <FiInstagram className="social-icon" />
-                <FiTwitter className="social-icon" />
-                <FiYoutube className="social-icon" />
-                <FiFacebook className="social-icon" />
-              </Socials>
-            </div>
-          </>
-        )}
+      <header
+        className="global-header full-width"
+        style={
+          isHomePage
+            ? null
+            : {
+                boxShadow:
+                  "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+                marginBottom: 35,
+              }
+        }
+      >
+        <div className="container">
+          {isHomePage ? (
+            <>
+              <div className="header-left">
+                <FiMenu className="menu-icon" onClick={() => openMenu()} />
+              </div>
+              <div className="header-center">
+                <ImageBox className="logo-wrapper">
+                  <Link to="/">
+                    <Image
+                      fluid={home_logo.childImageSharp.fluid}
+                      alt={home_logo.childImageSharp.alt}
+                      className="nav-logo"
+                    />
+                  </Link>
+                  {/* <h1 className="main-heading">
+                <Link to="/">{parse(title)}</Link>
+              </h1> */}
+                </ImageBox>
+              </div>
+              <div className="header-right">
+                <Socials className="social-box">
+                  <Link
+                    className="social-link"
+                    rel="noopener"
+                    target="_blank"
+                    to="https://www.instagram.com/bealtainemagazine/"
+                  >
+                    <FiInstagram className="social-icon" />
+                  </Link>
+                </Socials>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="header-left">
+                <FiMenu className="menu-icon" onClick={() => openMenu()} />
+              </div>
+              <div className="header-center">
+                <ImageBox className="logo-wrapper">
+                  <Link to="/">
+                    <Image
+                      fluid={home_logo.childImageSharp.fluid}
+                      alt={home_logo.childImageSharp.alt}
+                      className="nav-logo"
+                    />
+                  </Link>
+                  {/* <h1 className="main-heading">
+                <Link to="/">{parse(title)}</Link>
+              </h1> */}
+                </ImageBox>
+              </div>
+              <div className="header-right">
+                <Socials className="social-box">
+                  <Link
+                    className="social-link"
+                    rel="noopener"
+                    target="_blank"
+                    to="https://www.instagram.com/bealtainemagazine/"
+                  >
+                    <FiInstagram className="social-icon" />
+                  </Link>
+                </Socials>
+              </div>
+            </>
+          )}
+        </div>
       </header>
 
       <main>
