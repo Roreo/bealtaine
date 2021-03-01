@@ -64,6 +64,10 @@ $color-heading: $color-black;
 $color-heading-black: black;
 $color-accent: $color-primary-light;
 
+body {
+  overflow-x: hidden;
+}
+
 .full-width {
   margin-left: calc(-100vw / 2 + (56rem - 40px) / 2);
   margin-right: calc(-100vw / 2 + (56rem - 40px) / 2);
@@ -82,7 +86,7 @@ body {
   height: 500px;
   @media (max-width: 768px) {
     height: 300px;
-    + h1 {
+    + h2 {
       font-size: 32px;
       text-align: center;
     }
@@ -105,6 +109,27 @@ body.no-scroll {
 .swiper-custom,
 .swiper-custom-slide {
   height: 500px;
+
+  p,
+  h2 {
+    z-index: 1;
+    color: $color-white;
+  }
+
+  .article-gradient {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 10%,
+      rgba(0, 0, 0, 0.6026785714285714) 100%
+    );
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 6px;
+    z-index: 0;
+  }
+
   @media (max-width: 768px) {
     height: 300px;
   }
@@ -129,6 +154,14 @@ a.more-link {
 .bealtaine-article {
   &:hover {
     .article-bg {
+      z-index: -3;
+    }
+
+    .inline-gatsby-image-wrapper,
+    .inline-gatsby-image-wrapper span {
+      img {
+        transform: scale(1.15);
+      }
     }
   }
 
@@ -146,7 +179,7 @@ a.more-link {
     background: rgb(0, 0, 0);
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0) 20%,
+      rgba(0, 0, 0, 0) 10%,
       rgba(0, 0, 0, 0.6026785714285714) 100%
     );
     height: 100%;
@@ -204,6 +237,7 @@ a.more-link {
     background: $color-primary;
     height: 300px;
     border-radius: 6px;
+    transition: all 0.5s !important;
 
     @media (max-width: 768px) {
     }
@@ -234,7 +268,12 @@ a.more-link {
     height: 100% !important;
     border-radius: 6px;
     width: auto;
+    transition: transform 2s;
     z-index: -1;
+
+    img {
+      transition: all 0.5s !important;
+    }
   }
 }
 

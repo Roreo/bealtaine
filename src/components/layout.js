@@ -212,6 +212,7 @@ const Layout = ({ isHomePage, children }) => {
         target={post.node.top_post.customLink ? "_blank" : ""}
         rel={post.node.top_post.customLink ? "noopener" : ""}
       >
+        <div className="article-gradient"></div>
         <Image
           fluid={post.node.top_post.tpImage.localFile.childImageSharp.fluid}
           alt={post.node.top_post.tpImage.altText}
@@ -222,7 +223,7 @@ const Layout = ({ isHomePage, children }) => {
             zIndex: -1,
           }}
         />
-        <h1>{post.node.title}</h1>
+        <h2>{post.node.title}</h2>
         <p>{post.node.top_post.description}</p>
       </a>
     </SwiperSlide>
