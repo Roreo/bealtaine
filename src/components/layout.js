@@ -214,7 +214,7 @@ const Layout = ({ isHomePage, children }) => {
       >
         <div className="article-gradient"></div>
         <Image
-          fluid={post.node.top_post.tpImage.localFile.childImageSharp.fluid}
+          fluid={post.node.top_post.tpImage?.localFile?.childImageSharp?.fluid}
           alt={post.node.top_post.tpImage.altText}
           className="gatsby-hero-image"
           style={{

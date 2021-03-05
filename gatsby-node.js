@@ -23,8 +23,23 @@ exports.createPages = async gatsbyUtilities => {
   // If there are posts and pages, create Gatsby pages for them
   await createSinglePages({ posts, gatsbyUtilities })
 
-  // And a paginated archive
-  await createBlogPostArchive({ posts, gatsbyUtilities })
+  const allCats = await getCategories(gatsbyUtilities)
+
+  await Promise.all(
+    allCats.map(async cat => {
+      // And a paginated archive
+      const category = cat.node.slug
+      const uri = cat.node.uri
+      await createBlogPostArchive({ posts, gatsbyUtilities, category, uri })
+    })
+  )
+
+  // allCats.forEach(function (cat) {
+  //   // And a paginated archive
+  //   const category = cat.node.slug
+  //   const uri = cat.node.uri
+  //   createBlogPostArchive({ posts, gatsbyUtilities, category, uri })
+  // })
 }
 
 /**
@@ -62,9 +77,14 @@ const createSinglePages = async ({ posts, gatsbyUtilities }) =>
   )
 
 /**
- * This function creates all the individual blog pages in this site
+ * This function creates a blog post archive
  */
-async function createBlogPostArchive({ posts, gatsbyUtilities }) {
+async function createBlogPostArchive({
+  posts,
+  gatsbyUtilities,
+  category,
+  uri,
+}) {
   const graphqlResult = await gatsbyUtilities.graphql(/* GraphQL */ `
     {
       wp {
@@ -90,7 +110,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
           // we want the first page to be "/" and any additional pages
           // to be numbered.
           // "/blog/2" for example
-          return page === 1 ? `/test` : `/blog/${page}`
+          return page === 1 ? `${uri}` : `${uri}${page}`
         }
 
         return null
@@ -114,6 +134,8 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 
           // We need to tell the template how many posts to display too
           postsPerPage,
+
+          passedCategory: category,
 
           nextPagePath: getPagePath(pageNumber + 1),
           previousPagePath: getPagePath(pageNumber - 1),
@@ -184,4 +206,30 @@ async function getNodes({ graphql, reporter }) {
     ...graphqlResult.data.allWpPost.edges,
     ...graphqlResult.data.allWpPage.edges,
   ]
+}
+
+async function getCategories({ graphql, reporter }) {
+  const graphqlResult = await graphql(/* GraphQL */ `
+    query AllCategories {
+      # Query all WordPress categories
+      allWpCategory {
+        edges {
+          node {
+            slug
+            uri
+          }
+        }
+      }
+    }
+  `)
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your blog posts`,
+      graphqlResult.errors
+    )
+    return
+  }
+
+  return [...graphqlResult.data.allWpCategory.edges]
 }
