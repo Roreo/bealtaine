@@ -2,21 +2,19 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import parse from "html-react-parser"
 import Image from "gatsby-image"
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const BlogIndex = ({
   data,
-  pageContext: { nextPagePath, previousPagePath },
+  pageContext: { nextPagePath, previousPagePath, passedCategory },
 }) => {
   const posts = data.allWpPost.nodes
 
   if (!posts.length) {
     return (
-      <Layout isHomePage>
-        <SEO title="Home" />
-        <Bio />
+      <Layout>
+        <SEO title="Blog" />
         <p>
           No blog posts found. Add posts to your WordPress site and they'll
           appear here!
@@ -26,12 +24,11 @@ const BlogIndex = ({
   }
 
   return (
-    <Layout isHomePage>
-      <SEO title="Home" />
-
-      <Bio />
-
-      <ol className="" style={{ listStyle: `none` }}>
+    <Layout>
+      <SEO
+        title={passedCategory.charAt(0).toUpperCase() + passedCategory.slice(1)}
+      />
+      <ol className="post-box" style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.title
           const featuredImage = {
@@ -40,7 +37,9 @@ const BlogIndex = ({
           }
           const category = post.categories.nodes.map(cat => {
             return (
-              <small className="post-cat">{cat.name}</small>
+              <small key={cat.id} className="post-cat">
+                {cat.name}
+              </small>
             )
           })
 
@@ -59,11 +58,11 @@ const BlogIndex = ({
                   </h2>
                   <small className="post-date">{post.date}</small>
                 </header>
-                <div className="cat-container">
-                  {category}
-                </div>
-                <div className="article-gradient" ></div>
-                <section className="pullquote" itemProp="description">{parse(post.excerpt)}</section>
+                <div className="cat-container">{category}</div>
+                <div className="article-gradient"></div>
+                <section className="pullquote" itemProp="description">
+                  {parse(post.excerpt)}
+                </section>
                 {/* if we have a featured image for this post let's display it */}
                 {featuredImage?.fluid ? (
                   <Image
@@ -73,7 +72,14 @@ const BlogIndex = ({
                     style={{ marginBottom: 50 }}
                   />
                 ) : (
-                    <div className="article-bg" style={ post.article_bg ? {background: post.article_bg.articleBg} : null }></div>
+                  <div
+                    className="article-bg"
+                    style={
+                      post.article_bg
+                        ? { background: post.article_bg.articleBg }
+                        : null
+                    }
+                  ></div>
                 )}
               </article>
             </li>
@@ -95,11 +101,18 @@ const BlogIndex = ({
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query WordPressPostArchive($offset: Int!, $postsPerPage: Int!) {
+  query WordPressPostArchive(
+    $offset: Int!
+    $postsPerPage: Int!
+    $passedCategory: String!
+  ) {
     allWpPost(
       sort: { fields: [date], order: DESC }
       limit: $postsPerPage
       skip: $offset
+      filter: {
+        categories: { nodes: { elemMatch: { slug: { eq: $passedCategory } } } }
+      }
     ) {
       nodes {
         excerpt
@@ -113,6 +126,7 @@ export const pageQuery = graphql`
         categories {
           nodes {
             name
+            id
           }
         }
         featuredImage {
@@ -121,7 +135,7 @@ export const pageQuery = graphql`
             altText
             localFile {
               childImageSharp {
-                fluid(maxWidth: 600, quality: 80) {
+                fluid(maxWidth: 1000, quality: 100) {
                   ...GatsbyImageSharpFluid_tracedSVG
                 }
               }

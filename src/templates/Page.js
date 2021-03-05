@@ -35,7 +35,9 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
           <small className="post-date">{item.author.node.name}</small>
         </header>
         <div className="cat-container">
-          <div class="post-cat">{post.category_page?.categoryToShow?.name}</div>
+          <div className="post-cat">
+            {post.category_page?.categoryToShow?.name}
+          </div>
         </div>
         <div className="article-gradient"></div>
         <section className="pullquote" itemProp="description">
