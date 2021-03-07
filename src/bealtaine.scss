@@ -64,10 +64,6 @@ $color-heading: $color-black;
 $color-heading-black: black;
 $color-accent: $color-primary-light;
 
-body {
-  overflow-x: hidden;
-}
-
 .full-width {
   margin-left: calc(-100vw / 2 + (56rem - 40px) / 2);
   margin-right: calc(-100vw / 2 + (56rem - 40px) / 2);
@@ -80,6 +76,13 @@ body {
 
 body {
   background: rgba(243, 237, 232, 0.25);
+  overflow-x: hidden;
+}
+
+.front-page {
+  .page-main-title {
+    display: none;
+  }
 }
 
 .gatsby-hero-image {
@@ -158,9 +161,10 @@ a.more-link {
     }
 
     .inline-gatsby-image-wrapper,
+    .article-img,
     .inline-gatsby-image-wrapper span {
       img {
-        transform: scale(1.15);
+        transform: scale(1.06);
       }
     }
   }
@@ -169,6 +173,7 @@ a.more-link {
     position: relative;
     height: 300px;
     overflow: hidden;
+    border-radius: 6px;
 
     @media (max-width: 768px) {
       margin-top: 10px;
@@ -230,6 +235,13 @@ a.more-link {
   .article-img {
     z-index: -1;
     border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    img {
+      transition: all 0.5s !important;
+    }
   }
 
   .article-bg {
@@ -274,6 +286,14 @@ a.more-link {
     img {
       transition: all 0.5s !important;
     }
+  }
+
+  .lazy-image {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
   }
 }
 

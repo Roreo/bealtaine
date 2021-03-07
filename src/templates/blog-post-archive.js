@@ -31,9 +31,11 @@ const BlogIndex = ({
       <ol className="post-box" style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.title
-          const featuredImage = {
-            fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
-            alt: post.featuredImage?.node?.alt || ``,
+          const listingImage = {
+            fluid:
+              post.listing_image?.listingImage?.localFile?.childImageSharp
+                ?.fluid,
+            alt: post.listing_image?.listingImage?.alt || ``,
           }
           const category = post.categories.nodes.map(cat => {
             return (
@@ -45,43 +47,47 @@ const BlogIndex = ({
 
           return (
             <li className="bealtaine-article" key={post.uri}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link to={post.uri} itemProp="url">
-                      <span itemProp="headline">{parse(title)}</span>
-                    </Link>
-                  </h2>
-                  <small className="post-date">{post.date}</small>
-                </header>
-                <div className="cat-container">{category}</div>
-                <div className="article-gradient"></div>
-                <section className="pullquote" itemProp="description">
-                  {parse(post.excerpt)}
-                </section>
-                {/* if we have a featured image for this post let's display it */}
-                {featuredImage?.fluid ? (
-                  <Image
-                    className="article-img"
-                    fluid={featuredImage.fluid}
-                    alt={featuredImage.alt}
-                    style={{ marginBottom: 50 }}
-                  />
-                ) : (
-                  <div
-                    className="article-bg"
-                    style={
-                      post.article_bg
-                        ? { background: post.article_bg.articleBg }
-                        : null
-                    }
-                  ></div>
-                )}
-              </article>
+              <Link to={post.uri} itemProp="url">
+                <article
+                  className="post-list-item"
+                  itemScope
+                  itemType="http://schema.org/Article"
+                >
+                  <header>
+                    <h2>
+                      <Link to={post.uri} itemProp="url">
+                        <span itemProp="headline">{parse(title)}</span>
+                      </Link>
+                    </h2>
+                    <small className="post-date">{post.date}</small>
+                  </header>
+                  <div className="cat-container">{category}</div>
+                  <div className="article-gradient"></div>
+                  {!post.hide_excerpt?.value && (
+                    <section className="pullquote" itemProp="description">
+                      {parse(post.excerpt)}
+                    </section>
+                  )}
+                  {/* if we have a featured image for this post let's display it */}
+                  {listingImage?.fluid ? (
+                    <Image
+                      className="article-img"
+                      fluid={listingImage.fluid}
+                      alt={listingImage.alt}
+                      style={{ marginBottom: 50 }}
+                    />
+                  ) : (
+                    <div
+                      className="article-bg"
+                      style={
+                        post.article_bg
+                          ? { background: post.article_bg.articleBg }
+                          : null
+                      }
+                    ></div>
+                  )}
+                </article>
+              </Link>
             </li>
           )
         })}
@@ -129,14 +135,17 @@ export const pageQuery = graphql`
             id
           }
         }
-        featuredImage {
-          node {
+        hide_excerpt {
+          value
+        }
+        listing_image {
+          listingImage {
             mediaItemUrl
             altText
             localFile {
               childImageSharp {
-                fluid(maxWidth: 1000, quality: 100) {
-                  ...GatsbyImageSharpFluid_tracedSVG
+                fluid(maxWidth: 500, quality: 70) {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
