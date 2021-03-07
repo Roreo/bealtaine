@@ -104,6 +104,8 @@ async function createBlogPostArchive({
     postsChunkedIntoArchivePages.map(async (_posts, index) => {
       const pageNumber = index + 1
 
+      console.log(totalPages)
+
       const getPagePath = page => {
         if (page > 0 && page <= totalPages) {
           // Since our homepage is our blog page

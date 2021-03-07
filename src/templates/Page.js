@@ -72,12 +72,14 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
       )}
 
       <article
-        className="blog-post"
+        className={`blog-post ` + (post.isFrontPage ? "front-page" : "")}
         itemScope
         itemType="http://schema.org/Article"
       >
         <header>
-          <h1 itemProp="headline">{parse(post.title)}</h1>
+          <h1 className="page-main-title" itemProp="headline">
+            {parse(post.title)}
+          </h1>
           {/* if we have a featured image for this post let's display it */}
           {featuredImage?.fluid && (
             <Image
