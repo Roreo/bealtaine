@@ -79,6 +79,33 @@ body {
   overflow-x: hidden;
 }
 
+footer {
+  height: 350px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-bottom: 0;
+
+  .footer-bg-img {
+    height: 350px;
+    width: 100vw;
+    position: absolute !important;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .footer-center-logo {
+    width: 80px;
+    height: 73px;
+  }
+}
+
+.global-wrapper {
+  padding-bottom: 0;
+}
+
 .front-page {
   .page-main-title {
     display: none;

@@ -38,11 +38,11 @@ const BlogIndex = ({
             alt: post.listing_image?.listingImage?.alt || ``,
           }
           const category = post.categories.nodes.map(cat => {
-            return (
+            return cat.parentId ? (
               <small key={cat.id} className="post-cat">
                 {cat.name}
               </small>
-            )
+            ) : null
           })
 
           return (
@@ -59,7 +59,11 @@ const BlogIndex = ({
                         <span itemProp="headline">{parse(title)}</span>
                       </Link>
                     </h2>
-                    <small className="post-date">{post.date}</small>
+                    <small className="post-date">
+                      {post.issue_number?.issueNumber
+                        ? post.issue_number?.issueNumber
+                        : post.date}
+                    </small>
                   </header>
                   <div className="cat-container">{category}</div>
                   <div className="article-gradient"></div>
@@ -129,10 +133,14 @@ export const pageQuery = graphql`
         article_bg {
           articleBg
         }
+        issue_number {
+          issueNumber
+        }
         categories {
           nodes {
             name
             id
+            parentId
           }
         }
         hide_excerpt {

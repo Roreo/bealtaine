@@ -24,6 +24,8 @@ const Layout = ({ isHomePage, children }) => {
     // },
     logo,
     home_logo,
+    footer,
+    footer_logo,
     topPosts,
     menu,
   } = useStaticQuery(graphql`
@@ -36,7 +38,7 @@ const Layout = ({ isHomePage, children }) => {
       }
       logo: file(relativePath: { eq: "Bdark.png" }) {
         childImageSharp {
-          fluid(maxWidth: 200, quality: 100) {
+          fluid(maxWidth: 60, quality: 100) {
             src
           }
         }
@@ -44,6 +46,20 @@ const Layout = ({ isHomePage, children }) => {
       home_logo: file(relativePath: { eq: "bealtaine_home.png" }) {
         childImageSharp {
           fluid(maxWidth: 700, quality: 100) {
+            src
+          }
+        }
+      }
+      footer: file(relativePath: { eq: "bfooter.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 2200, quality: 70) {
+            src
+          }
+        }
+      }
+      footer_logo: file(relativePath: { eq: "footer_logo.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 80, quality: 100) {
             src
           }
         }
@@ -379,12 +395,31 @@ const Layout = ({ isHomePage, children }) => {
         {children}
       </main>
 
-      <footer>
-        © {new Date().getFullYear()}, built in Brooklyn, with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-        {` `}
-        and <a href="https://wordpress.org/">WordPress</a>
+      <footer className="full-width">
+        <Image
+          fluid={footer.childImageSharp.fluid}
+          alt={footer.childImageSharp.alt}
+          className="footer-bg-img"
+        />
+        <div class="link-box ftr-section">
+          <Link className="footer-link" to="/about">
+            About
+          </Link>
+        </div>
+        <div class="logo-box ftr-section">
+          <Image
+            fluid={footer_logo.childImageSharp.fluid}
+            alt={footer_logo.childImageSharp.alt}
+            className="footer-center-logo"
+          />
+        </div>
+        <div class="info-box ftr-section">
+          © {new Date().getFullYear()}, built in Brooklyn, with
+          {` `}
+          <a href="https://www.gatsbyjs.com">Gatsby</a>
+          {` `}
+          and <a href="https://wordpress.org/">WordPress</a>
+        </div>
       </footer>
     </div>
   )
