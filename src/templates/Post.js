@@ -2,12 +2,9 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import Image from "gatsby-image"
 import parse from "html-react-parser"
-
 // We're using Gutenberg so we need the block styles
 import "@wordpress/block-library/build-style/style.css"
 import "@wordpress/block-library/build-style/theme.css"
-
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -29,7 +26,11 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
         <header>
           <h1 itemProp="headline">{parse(post.title)}</h1>
 
-          <p>{post.date}</p>
+          <p>
+            {post.issue_number?.issueNumber
+              ? post.issue_number?.issueNumber
+              : post.date}
+          </p>
 
           {/* if we have a featured image for this post let's display it */}
           {featuredImage?.fluid && (
@@ -44,10 +45,6 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
         {!!post.content && (
           <section itemProp="articleBody">{parse(post.content)}</section>
         )}
-
-        <hr />
-
-        <footer> <Bio /> </footer>
       </article>
 
       <nav className="blog-post-nav">
@@ -97,7 +94,9 @@ export const pageQuery = graphql`
       content
       title
       date(formatString: "MMMM DD, YYYY")
-
+      issue_number {
+        issueNumber
+      }
       featuredImage {
         node {
           altText

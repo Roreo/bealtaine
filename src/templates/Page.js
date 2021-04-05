@@ -99,10 +99,6 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
             {catListing}
           </ol>
         )}
-
-        <hr />
-
-        <footer> {/* <Bio /> */} </footer>
       </article>
 
       <nav className="blog-post-nav">
