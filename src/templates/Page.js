@@ -101,7 +101,7 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
         )}
       </article>
 
-      <nav className="blog-post-nav">
+      {/* <nav className="blog-post-nav">
         <ul
           style={{
             display: `flex`,
@@ -127,7 +127,7 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
             )}
           </li>
         </ul>
-      </nav>
+      </nav> */}
     </Layout>
   )
 }
