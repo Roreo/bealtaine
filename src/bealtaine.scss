@@ -165,6 +165,14 @@ body.no-scroll {
   }
 }
 
+.blog-post {
+  .wp-block-image {
+    .aligncenter {
+      display: block;
+    }
+  }
+}
+
 //hide read more link
 a.more-link {
   display: none;
@@ -177,6 +185,119 @@ a.more-link {
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+  }
+}
+
+//bio card
+.author-bio-card {
+  position: relative;
+  margin-top: 65px;
+  margin-bottom: 65px;
+
+  .top-section {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    column-gap: 15px;
+    margin-bottom: 40px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      margin-bottom: 0;
+    }
+
+    .rh-info {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-flow: column;
+
+      h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      a {
+        display: inline-block;
+        padding-left: 10px;
+      }
+      svg {
+        display: inline-block;
+        margin-top: 2px;
+      }
+
+      .social-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 3px 0px;
+      }
+    }
+
+    .lh-bio-pic {
+      @media (max-width: 768px) {
+        margin-bottom: 50px;
+      }
+
+      .bio-square-yellow {
+        width: 110px;
+        height: 110px;
+        background: $color-primary;
+        margin-top: 20px;
+      }
+      .bio-square-green {
+        width: 110px;
+        height: 110px;
+        background: $color-green;
+        position: absolute;
+        top: 0;
+        left: 40px;
+      }
+      .bio-square-gray {
+        width: 110px;
+        height: 110px;
+        background: $color-gray;
+        position: absolute;
+        top: 40px;
+        left: 20px;
+      }
+      .bio-logo {
+        position: absolute;
+        margin: 0;
+        width: 65px;
+        top: 63px;
+        left: 40px;
+      }
+      .author-img {
+        position: absolute;
+        margin: 0;
+        width: 110px;
+        top: 40px;
+        left: 20px;
+        height: 110px;
+        object-fit: cover;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .bio-wrap {
+    position: relative;
+
+    svg {
+      width: 100%;
+      position: absolute;
+      bottom: -30px;
+      z-index: -1;
+    }
+
+    .lazy-image {
+      position: absolute;
+      top: 0;
+      left: -5px;
+      margin: 0;
+      width: 110px;
+      z-index: -1;
+      transform: rotate(180deg);
+    }
   }
 }
 
