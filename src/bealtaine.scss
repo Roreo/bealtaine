@@ -105,6 +105,7 @@ footer {
 
 .global-wrapper {
   padding-bottom: 0;
+  overflow-x: hidden;
 }
 
 .front-page {
@@ -213,12 +214,12 @@ body.no-scroll {
     text-decoration: none;
 
     svg {
-      width: 150%;
+      width: 130%;
       z-index: -1;
       position: absolute;
       top: -80%;
       left: 0;
-      margin-left: -25%;
+      margin-left: -15%;
     }
   }
 }
