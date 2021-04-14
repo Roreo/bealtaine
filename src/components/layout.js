@@ -402,8 +402,11 @@ const Layout = ({ isHomePage, children }) => {
           className="footer-bg-img"
         />
         <div class="link-box ftr-section">
-          <Link className="footer-link" to="/about">
-            About
+          <Link className="footer-link" to="/about/">
+            About us
+          </Link>
+          <Link className="footer-link" to="/our-authors-and-artists/">
+            Our authors and artists
           </Link>
         </div>
         <div class="logo-box ftr-section">
