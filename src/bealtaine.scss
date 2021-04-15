@@ -704,6 +704,7 @@ a.more-link {
     padding: 0px 30px;
     position: absolute;
     z-index: 1;
+    width: 100%;
 
     h2 {
       position: relative;
@@ -712,6 +713,9 @@ a.more-link {
 
     .post-date {
       color: $color-white;
+      max-width: 60%;
+      display: block;
+      overflow-wrap: break-word;
     }
 
     .post-author {
@@ -751,6 +755,8 @@ a.more-link {
     align-items: center;
     justify-content: center;
     flex-flow: column;
+    max-width: 31%;
+    overflow-wrap: break-word;
   }
 
   .post-cat {

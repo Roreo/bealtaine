@@ -438,7 +438,8 @@ const Layout = ({ isHomePage, children }) => {
                 ⚡
               </span>
             </Link>
-            , with
+            {` `}
+            with
             {` `}
             <Link
               target="_blank"
