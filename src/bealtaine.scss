@@ -422,7 +422,7 @@ a.more-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 100px;
+    padding-bottom: 140px;
 
     p {
       color: white;
@@ -450,6 +450,11 @@ a.more-link {
 
     .post-date {
       color: $color-white;
+    }
+
+    .post-author {
+      color: $color-white;
+      display: block;
     }
   }
 
@@ -607,6 +612,81 @@ a.more-link {
 //footer styles
 footer {
   font-size: 14px;
+  padding: 0;
+  position: relative;
+
+  .ftr-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    height: 100%;
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      row-gap: 30px;
+    }
+
+    .link-box {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-flow: column;
+
+      a {
+        display: block;
+        font-size: $fontSize-2;
+        text-decoration: none;
+        transition: all 0.4s;
+        position: relative;
+        padding: 2px 8px;
+        margin: 8px 0px;
+
+        &::before {
+          transition: all 0.3s;
+          background: $color-primary-light;
+          height: 100%;
+          width: 100%;
+          display: inline-block;
+          position: absolute;
+          transform: skew(-20deg) translateX(-8px) translateY(-2px);
+          z-index: -1;
+          content: "";
+          opacity: 0;
+        }
+
+        &:hover,
+        &:focus {
+          color: $color-text-light;
+          &::before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: column;
+
+      .footer-center-logo {
+        display: block;
+      }
+
+      h2 {
+        display: block;
+        color: $color-gray;
+        margin-top: 20px;
+      }
+    }
+
+    .info-box {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 
 //swiper styles
