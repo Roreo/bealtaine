@@ -344,6 +344,11 @@ body.no-scroll {
       max-width: 100%;
     }
   }
+
+  ul,
+  ol {
+    padding-left: 30px;
+  }
 }
 
 .blog-post-nav {
@@ -630,17 +635,21 @@ a.more-link {
         transform: scale(1.06);
       }
     }
-
-    .article-gradient {
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) -50%,
-        rgba(0, 0, 0, 0.6026785714285714) 100%
-      );
-      opacity: 0.3;
-    }
   }
 
+  &.no-img-article {
+    &:hover,
+    &:focus {
+      .article-gradient {
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) -50%,
+          rgba(0, 0, 0, 0.6026785714285714) 100%
+        );
+        opacity: 0.3;
+      }
+    }
+  }
   .post-list-item {
     position: relative;
     height: 300px;
