@@ -48,6 +48,7 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
       </article>
 
       <nav className="blog-post-nav">
+        <h2>More posts</h2>
         <ul
           style={{
             display: `flex`,
@@ -60,6 +61,9 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
           <li>
             {previous && (
               <Link to={previous.uri} className="prev-blob" rel="prev">
+                <span role="img" aria-label="Previous post">
+                  ←
+                </span>{" "}
                 {parse(previous.title)}
                 <svg
                   width="136"
@@ -81,7 +85,10 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
           <li>
             {next && (
               <Link to={next.uri} className="next-blob" rel="next">
-                {parse(next.title)}
+                {parse(next.title)}{" "}
+                <span role="img" aria-label="Next post">
+                  →
+                </span>
                 <svg
                   width="135"
                   height="67"
