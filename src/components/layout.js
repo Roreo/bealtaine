@@ -13,6 +13,7 @@ import "rc-drawer/assets/index.css"
 // Import Swiper styles
 import "swiper/swiper.min.css"
 import { FiMenu, FiInstagram, FiChevronRight } from "react-icons/fi"
+import CookieConsent from "react-cookie-consent"
 
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Autoplay])
@@ -395,7 +396,7 @@ const Layout = ({ isHomePage, children }) => {
         {children}
       </main>
 
-      <footer className="full-width">
+      <footer>
         <Image
           fluid={footer.childImageSharp.fluid}
           alt={footer.childImageSharp.alt}
@@ -415,6 +416,9 @@ const Layout = ({ isHomePage, children }) => {
             <Link className="footer-link" to="/visual-art/">
               Visual art
             </Link>
+            <Link className="footer-link" to="/privacy-policy/">
+              Privacy policy
+            </Link>
           </div>
           <div class="logo-box ftr-section">
             <Image
@@ -425,6 +429,7 @@ const Layout = ({ isHomePage, children }) => {
             <h2>Bealtaine Magazine</h2>
           </div>
         </div>
+        <hr />
         <div class="info-box ftr-section">
           <p>
             © {new Date().getFullYear()}, website built by{" "}
@@ -441,11 +446,43 @@ const Layout = ({ isHomePage, children }) => {
               rel="noopener"
               href="https://www.gatsbyjs.com"
             >
-              Gatsby
+              Gatsby.{" "}
+            </Link>
+          </p>
+          <p>
+            Logo design by{" "}
+            <Link
+              target="_blank"
+              rel="noopener"
+              href="https://www.luciamorenomontero.com/"
+            >
+              Lucia Moreno Montero.
             </Link>
           </p>
         </div>
       </footer>
+      <CookieConsent
+        location="bottom"
+        buttonText="Accept"
+        enableDeclineButton
+        declineButtonText="Decline"
+        cookieName="gatsby-gdpr-google-tagmanager"
+        style={{
+          background: "#213b1f",
+          fontSize: "15px",
+          padding: "15px",
+          display: "flex",
+          alignItems: "center",
+        }}
+        buttonStyle={{}}
+        declineButtonStyle={{}}
+      >
+        This website uses cookies to provide you with the best experience while
+        you navigate through the website and to solve any errors that may occur.
+        These cookies will be stored in your browser only with your consent. You
+        also have the option to opt-out of these cookies. For more information,
+        please read our <a href="/privacy-policy/">Privacy Policy</a>.
+      </CookieConsent>
     </div>
   )
 }
