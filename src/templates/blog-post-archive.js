@@ -59,6 +59,11 @@ const BlogIndex = ({
                         <span itemProp="headline">{parse(title)}</span>
                       </Link>
                     </h2>
+                    {post.issue_number?.author && (
+                      <small className="post-author">
+                        {post.issue_number?.author}
+                      </small>
+                    )}
                     <small className="post-date">
                       {post.issue_number?.issueNumber
                         ? post.issue_number?.issueNumber
@@ -135,6 +140,7 @@ export const pageQuery = graphql`
         }
         issue_number {
           issueNumber
+          author
         }
         categories {
           nodes {

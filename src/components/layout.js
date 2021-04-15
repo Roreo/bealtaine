@@ -401,27 +401,49 @@ const Layout = ({ isHomePage, children }) => {
           alt={footer.childImageSharp.alt}
           className="footer-bg-img"
         />
-        <div class="link-box ftr-section">
-          <Link className="footer-link" to="/about/">
-            About us
-          </Link>
-          <Link className="footer-link" to="/our-authors-and-artists/">
-            Our authors and artists
-          </Link>
-        </div>
-        <div class="logo-box ftr-section">
-          <Image
-            fluid={footer_logo.childImageSharp.fluid}
-            alt={footer_logo.childImageSharp.alt}
-            className="footer-center-logo"
-          />
+        <div className="ftr-wrap">
+          <div class="link-box ftr-section">
+            <Link className="footer-link" to="/about/">
+              About us
+            </Link>
+            <Link className="footer-link" to="/our-authors-and-artists/">
+              Our authors and artists
+            </Link>
+            <Link className="footer-link" to="/literature/">
+              Literature
+            </Link>
+            <Link className="footer-link" to="/visual-art/">
+              Visual art
+            </Link>
+          </div>
+          <div class="logo-box ftr-section">
+            <Image
+              fluid={footer_logo.childImageSharp.fluid}
+              alt={footer_logo.childImageSharp.alt}
+              className="footer-center-logo"
+            />
+            <h2>Bealtaine Magazine</h2>
+          </div>
         </div>
         <div class="info-box ftr-section">
-          © {new Date().getFullYear()}, built in Brooklyn, with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-          {` `}
-          and <a href="https://wordpress.org/">WordPress</a>
+          <p>
+            © {new Date().getFullYear()}, website built by{" "}
+            <Link target="_blank" rel="noopener" href="https://roryo.co">
+              Rory O'Connor{" "}
+              <span role="img" aria-label="Lightning bolt emoji">
+                ⚡
+              </span>
+            </Link>
+            , with
+            {` `}
+            <Link
+              target="_blank"
+              rel="noopener"
+              href="https://www.gatsbyjs.com"
+            >
+              Gatsby
+            </Link>
+          </p>
         </div>
       </footer>
     </div>
