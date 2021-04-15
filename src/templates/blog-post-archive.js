@@ -76,7 +76,13 @@ const BlogIndex = ({
           })
 
           return (
-            <li className="bealtaine-article" key={post.uri}>
+            <li
+              className={
+                `bealtaine-article ` +
+                (listingImage.fluid ? "" : "no-img-article")
+              }
+              key={post.uri}
+            >
               <Link to={post.uri} itemProp="url">
                 <article
                   className="post-list-item"
