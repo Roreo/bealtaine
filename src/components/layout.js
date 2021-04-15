@@ -39,7 +39,7 @@ const Layout = ({ isHomePage, children }) => {
       }
       logo: file(relativePath: { eq: "Bdark.png" }) {
         childImageSharp {
-          fluid(maxWidth: 60, quality: 100) {
+          fluid(maxWidth: 300, quality: 100) {
             src
           }
         }
@@ -60,7 +60,7 @@ const Layout = ({ isHomePage, children }) => {
       }
       footer_logo: file(relativePath: { eq: "footer_logo.png" }) {
         childImageSharp {
-          fluid(maxWidth: 80, quality: 100) {
+          fluid(maxWidth: 300, quality: 100) {
             src
           }
         }
