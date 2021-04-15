@@ -195,6 +195,7 @@ footer {
       align-items: center;
       justify-content: center;
       flex-flow: column;
+      text-align: center;
 
       .footer-center-logo {
         display: block;
@@ -218,6 +219,7 @@ footer {
     @media (max-width: 768px) {
       flex-flow: column;
       align-items: flex-start;
+      margin-top: 30px;
     }
 
     p {
@@ -628,6 +630,15 @@ a.more-link {
         transform: scale(1.06);
       }
     }
+
+    .article-gradient {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) -50%,
+        rgba(0, 0, 0, 0.6026785714285714) 100%
+      );
+      opacity: 0.3;
+    }
   }
 
   .post-list-item {
@@ -642,7 +653,6 @@ a.more-link {
   }
 
   .article-gradient {
-    background: rgb(0, 0, 0);
     background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0) 10%,
@@ -653,6 +663,8 @@ a.more-link {
     position: absolute;
     border-radius: 6px;
     z-index: 0;
+    opacity: 1;
+    transition: all 0.5s !important;
   }
 
   .pullquote {
@@ -663,6 +675,7 @@ a.more-link {
     align-items: center;
     justify-content: center;
     padding-bottom: 140px;
+    z-index: 1;
 
     p {
       color: white;
@@ -1010,6 +1023,12 @@ a.more-link {
 //bealtaine menu
 .bealtaine-menu {
   list-style: none;
+  padding-left: 0;
+
+  ul {
+    padding-left: 0;
+  }
+
   .bealtaine-menu-item {
     padding: 0px 15px;
     margin: 7px 15px;

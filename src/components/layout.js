@@ -429,7 +429,6 @@ const Layout = ({ isHomePage, children }) => {
             <h2>Bealtaine Magazine</h2>
           </div>
         </div>
-        <hr />
         <div class="info-box ftr-section">
           <p>
             © {new Date().getFullYear()}, website built by{" "}
