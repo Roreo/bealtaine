@@ -35,6 +35,11 @@ module.exports = {
         googleTagManager: {
           trackingId: "GTM-5J8HB5L", // leave empty if you want to disable the tracker
           cookieName: "gatsby-gdpr-google-tagmanager", // default
+          defaultDataLayer: function () {
+            return {
+              pageType: window.pageType,
+            }
+          },
         },
         // Defines the environments where the tracking should be available  - default is ["production"]
         environments: ["production", "development"],

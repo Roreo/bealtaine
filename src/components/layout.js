@@ -14,6 +14,9 @@ import "rc-drawer/assets/index.css"
 import "swiper/swiper.min.css"
 import { FiMenu, FiInstagram, FiChevronRight } from "react-icons/fi"
 import CookieConsent from "react-cookie-consent"
+// in your cookie banner
+import { useLocation } from "@reach/router" // this helps tracking the location
+import { initializeAndTrack } from "gatsby-plugin-gdpr-cookies"
 
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Autoplay])
@@ -265,6 +268,8 @@ const Layout = ({ isHomePage, children }) => {
     }
   }
 
+  const location = useLocation()
+
   return (
     <div className="global-wrapper" data-is-root-path={isHomePage}>
       <Drawer
@@ -476,6 +481,10 @@ const Layout = ({ isHomePage, children }) => {
         }}
         buttonStyle={{}}
         declineButtonStyle={{}}
+        onAccept={() => {
+          alert("Accept was triggered by clicking the Accept button")
+          initializeAndTrack(location)
+        }}
       >
         This website uses cookies to provide you with the best experience while
         you navigate through the website and to solve any errors that may occur.
