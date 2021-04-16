@@ -482,7 +482,6 @@ const Layout = ({ isHomePage, children }) => {
         buttonStyle={{}}
         declineButtonStyle={{}}
         onAccept={() => {
-          alert("Accept was triggered by clicking the Accept button")
           initializeAndTrack(location)
         }}
       >
