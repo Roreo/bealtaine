@@ -471,7 +471,7 @@ const Layout = ({ isHomePage, children }) => {
         buttonText="Accept"
         enableDeclineButton
         declineButtonText="Decline"
-        cookieName="gatsby-gdpr-google-tagmanager"
+        cookieName="gatsby-gdpr-google-analytics"
         style={{
           background: "#213b1f",
           fontSize: "15px",
