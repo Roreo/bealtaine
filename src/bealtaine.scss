@@ -339,6 +339,14 @@ body.no-scroll {
 .blog-post {
   .wp-block-image {
     display: flex;
+
+    &:not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.woocommerce) {
+      margin-left: auto;
+      margin-right: auto;
+      a {
+        max-width: 100%;
+      }
+    }
     figure {
       display: block;
       max-width: 100%;
