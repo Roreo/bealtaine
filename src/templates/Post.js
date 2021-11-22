@@ -1,22 +1,23 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import Image from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import parse from "html-react-parser"
 // We're using Gutenberg so we need the block styles
 import "@wordpress/block-library/build-style/style.css"
 import "@wordpress/block-library/build-style/theme.css"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 const BlogPostTemplate = ({ data: { previous, next, post } }) => {
   const featuredImage = {
-    fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
+    fluid:
+      post.featuredImage?.node?.localFile?.childImageSharp?.gatsbyImageData,
     alt: post.featuredImage?.node?.alt || ``,
   }
 
   return (
     <Layout>
-      <SEO title={post.title} description={post.excerpt} />
+      <Seo title={post.title} description={post.excerpt} />
 
       <article
         className="blog-post"
@@ -34,8 +35,8 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
 
           {/* if we have a featured image for this post let's display it */}
           {featuredImage?.fluid && (
-            <Image
-              fluid={featuredImage.fluid}
+            <GatsbyImage
+              image={featuredImage.gatsbyImageData}
               alt={featuredImage.alt}
               style={{ marginBottom: 50 }}
             />
@@ -115,12 +116,10 @@ export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostById(
-    # these variables are passed in via createPage.pageContext in gatsby-node.js
     $id: String!
     $previousPostId: String
     $nextPostId: String
   ) {
-    # selecting the current post by id
     post: wpPost(id: { eq: $id }) {
       id
       excerpt
@@ -135,22 +134,20 @@ export const pageQuery = graphql`
           altText
           localFile {
             childImageSharp {
-              fluid(maxWidth: 1000, quality: 100) {
-                ...GatsbyImageSharpFluid_tracedSVG
-              }
+              gatsbyImageData(
+                quality: 100
+                placeholder: TRACED_SVG
+                layout: FULL_WIDTH
+              )
             }
           }
         }
       }
     }
-
-    # this gets us the previous post by id (if it exists)
     previous: wpPost(id: { eq: $previousPostId }) {
       uri
       title
     }
-
-    # this gets us the next post by id (if it exists)
     next: wpPost(id: { eq: $nextPostId }) {
       uri
       title

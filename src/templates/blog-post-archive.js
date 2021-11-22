@@ -1,9 +1,9 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import parse from "html-react-parser"
-import Image from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import Ghost from "../../content/assets/ghostB.svg"
 
 const BlogIndex = ({
@@ -15,7 +15,7 @@ const BlogIndex = ({
   if (!posts.length) {
     return (
       <Layout>
-        <SEO title="Blog" />
+        <Seo title="Blog" />
         <section className="no-posts">
           <img
             className="ghost-b"
@@ -55,7 +55,7 @@ const BlogIndex = ({
 
   return (
     <Layout>
-      <SEO
+      <Seo
         title={passedCategory.charAt(0).toUpperCase() + passedCategory.slice(1)}
       />
       <ol className="post-box" style={{ listStyle: `none` }}>
@@ -64,7 +64,7 @@ const BlogIndex = ({
           const listingImage = {
             fluid:
               post.listing_image?.listingImage?.localFile?.childImageSharp
-                ?.fluid,
+                ?.gatsbyImageData,
             alt: post.listing_image?.listingImage?.alt || ``,
           }
           const category = post.categories.nodes.map(cat => {
@@ -115,9 +115,9 @@ const BlogIndex = ({
                   )}
                   {/* if we have a featured image for this post let's display it */}
                   {listingImage?.fluid ? (
-                    <Image
+                    <GatsbyImage
+                      image={listingImage.gatsbyImageData}
                       className="article-img"
-                      fluid={listingImage.fluid}
                       alt={listingImage.alt}
                       style={{ marginBottom: 50 }}
                     />
@@ -225,9 +225,7 @@ export const pageQuery = graphql`
             altText
             localFile {
               childImageSharp {
-                fluid(maxWidth: 500, quality: 70) {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(width: 500, quality: 70, layout: CONSTRAINED)
               }
             }
           }
