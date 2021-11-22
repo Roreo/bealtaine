@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import Image from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import parse from "html-react-parser"
 
 // We're using Gutenberg so we need the block styles
@@ -9,11 +9,12 @@ import "@wordpress/block-library/build-style/theme.css"
 
 // import Bio from "../components/bio"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 const PageTemplate = ({ data: { previous, next, post } }) => {
   const featuredImage = {
-    fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
+    fluid:
+      post.featuredImage?.node?.localFile?.childImageSharp?.gatsbyImageData,
     alt: post.featuredImage?.node?.alt || ``,
   }
 
@@ -44,10 +45,13 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
           {parse(item.excerpt)}
         </section>
         {/* if we have a featured image for this post let's display it */}
-        {item.featuredImage?.node?.localFile?.childImageSharp?.fluid ? (
-          <Image
+        {item.featuredImage?.node?.localFile?.childImageSharp
+          ?.gatsbyImageData ? (
+          <GatsbyImage
+            image={
+              item.featuredImage.node.localFile.childImageSharp.gatsbyImageData
+            }
             className="article-img"
-            fluid={item.featuredImage.node.localFile.childImageSharp.fluid}
             alt={item.featuredImage.node.alt}
             style={{ marginBottom: 50, height: "100%" }}
           />
@@ -66,9 +70,9 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
   return (
     <Layout isHomePage={post.isFrontPage}>
       {post.isFrontPage ? (
-        <SEO title={"Home"} description={post.excerpt} />
+        <Seo title={"Home"} description={post.excerpt} />
       ) : (
-        <SEO title={post.title} description={post.excerpt} />
+        <Seo title={post.title} description={post.excerpt} />
       )}
 
       <article
@@ -82,8 +86,8 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
           </h1>
           {/* if we have a featured image for this post let's display it */}
           {featuredImage?.fluid && (
-            <Image
-              fluid={featuredImage.fluid}
+            <GatsbyImage
+              image={featuredImage.gatsbyImageData}
               alt={featuredImage.alt}
               style={{ marginBottom: 50 }}
             />
@@ -135,13 +139,7 @@ const PageTemplate = ({ data: { previous, next, post } }) => {
 export default PageTemplate
 
 export const pageQuery = graphql`
-  query PageById(
-    # these variables are passed in via createPage.pageContext in gatsby-node.js
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
-  ) {
-    # selecting the current post by id
+  query PageById($id: String!, $previousPostId: String, $nextPostId: String) {
     post: wpPage(id: { eq: $id }) {
       id
       isFrontPage
@@ -175,9 +173,11 @@ export const pageQuery = graphql`
                   altText
                   localFile {
                     childImageSharp {
-                      fluid(maxWidth: 1000, quality: 100) {
-                        ...GatsbyImageSharpFluid_tracedSVG
-                      }
+                      gatsbyImageData(
+                        quality: 100
+                        placeholder: TRACED_SVG
+                        layout: FULL_WIDTH
+                      )
                     }
                   }
                 }
@@ -192,20 +192,20 @@ export const pageQuery = graphql`
           altText
           localFile {
             childImageSharp {
-              fluid(maxWidth: 1000, quality: 100) {
-                ...GatsbyImageSharpFluid_tracedSVG
-              }
+              gatsbyImageData(
+                quality: 100
+                placeholder: TRACED_SVG
+                layout: FULL_WIDTH
+              )
             }
           }
         }
       }
     }
-    # this gets us the previous post by id (if it exists)
     previous: wpPage(id: { eq: $previousPostId }) {
       uri
       title
     }
-    # this gets us the next post by id (if it exists)
     next: wpPage(id: { eq: $nextPostId }) {
       uri
       title

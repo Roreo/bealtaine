@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-// import parse from "html-react-parser"
-import Image from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import styled from "styled-components/macro"
 import "../bealtaine.scss"
 // import Swiper core and required components
@@ -42,30 +41,37 @@ const Layout = ({ isHomePage, children }) => {
       }
       logo: file(relativePath: { eq: "Bdark.png" }) {
         childImageSharp {
-          fluid(maxWidth: 300, quality: 100) {
-            src
-          }
+          gatsbyImageData(
+            width: 300
+            quality: 100
+            placeholder: BLURRED
+            layout: CONSTRAINED
+          )
         }
       }
       home_logo: file(relativePath: { eq: "bealtaine_home.png" }) {
         childImageSharp {
-          fluid(maxWidth: 700, quality: 100) {
-            src
-          }
+          gatsbyImageData(
+            width: 700
+            quality: 100
+            placeholder: BLURRED
+            layout: CONSTRAINED
+          )
         }
       }
       footer: file(relativePath: { eq: "bfooter.png" }) {
         childImageSharp {
-          fluid(maxWidth: 2200, quality: 70) {
-            src
-          }
+          gatsbyImageData(quality: 70, placeholder: BLURRED, layout: FULL_WIDTH)
         }
       }
       footer_logo: file(relativePath: { eq: "footer_logo.png" }) {
         childImageSharp {
-          fluid(maxWidth: 300, quality: 100) {
-            src
-          }
+          gatsbyImageData(
+            width: 300
+            quality: 100
+            placeholder: BLURRED
+            layout: CONSTRAINED
+          )
         }
       }
       topPosts: allWpPost(
@@ -85,9 +91,11 @@ const Layout = ({ isHomePage, children }) => {
                 altText
                 localFile {
                   childImageSharp {
-                    fluid(maxWidth: 1800, quality: 70) {
-                      src
-                    }
+                    gatsbyImageData(
+                      quality: 70
+                      placeholder: BLURRED
+                      layout: FULL_WIDTH
+                    )
                   }
                 }
               }
@@ -230,11 +238,14 @@ const Layout = ({ isHomePage, children }) => {
             : post.node.uri
         }
         target={post.node.top_post.customLink ? "_blank" : ""}
-        rel={post.node.top_post.customLink ? "noopener" : ""}
+        rel={post.node.top_post.customLink ? "noreferrer" : ""}
       >
         <div className="article-gradient"></div>
-        <Image
-          fluid={post.node.top_post.tpImage?.localFile?.childImageSharp?.fluid}
+        <GatsbyImage
+          image={
+            post.node.top_post.tpImage?.localFile?.childImageSharp
+              ?.gatsbyImageData
+          }
           alt={post.node.top_post.tpImage?.altText}
           className="gatsby-hero-image"
           style={{
@@ -282,8 +293,8 @@ const Layout = ({ isHomePage, children }) => {
         <MenuFiller>
           <ImageBox>
             <Link to="/">
-              <Image
-                fluid={logo.childImageSharp.fluid}
+              <GatsbyImage
+                image={logo.childImageSharp.gatsbyImageData}
                 alt={logo.childImageSharp.alt}
                 style={{
                   height: 60,
@@ -321,8 +332,8 @@ const Layout = ({ isHomePage, children }) => {
               <div className="header-center">
                 <ImageBox className="logo-wrapper">
                   <Link to="/">
-                    <Image
-                      fluid={home_logo.childImageSharp.fluid}
+                    <GatsbyImage
+                      image={home_logo.childImageSharp.gatsbyImageData}
                       alt={home_logo.childImageSharp.alt}
                       className="nav-logo"
                     />
@@ -353,8 +364,8 @@ const Layout = ({ isHomePage, children }) => {
               <div className="header-center">
                 <ImageBox className="logo-wrapper">
                   <Link to="/">
-                    <Image
-                      fluid={home_logo.childImageSharp.fluid}
+                    <GatsbyImage
+                      image={home_logo.childImageSharp.gatsbyImageData}
                       alt={home_logo.childImageSharp.alt}
                       className="nav-logo"
                     />
@@ -402,8 +413,8 @@ const Layout = ({ isHomePage, children }) => {
       </main>
 
       <footer>
-        <Image
-          fluid={footer.childImageSharp.fluid}
+        <GatsbyImage
+          image={footer.childImageSharp.gatsbyImageData}
           alt={footer.childImageSharp.alt}
           className="footer-bg-img"
         />
@@ -426,8 +437,8 @@ const Layout = ({ isHomePage, children }) => {
             </Link>
           </div>
           <div class="logo-box ftr-section">
-            <Image
-              fluid={footer_logo.childImageSharp.fluid}
+            <GatsbyImage
+              image={footer_logo.childImageSharp.gatsbyImageData}
               alt={footer_logo.childImageSharp.alt}
               className="footer-center-logo"
             />
