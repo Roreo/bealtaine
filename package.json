@@ -23,6 +23,7 @@
     "gatsby-plugin-sass": "^2.8.0",
     "gatsby-plugin-sharp": "^2.14.4",
     "gatsby-plugin-styled-components": "^3.6.0",
+    "gatsby-plugin-utils": "^2.4.0",
     "gatsby-source-filesystem": "^2.6.0",
     "gatsby-source-wordpress": "^6.2.0",
     "gatsby-source-wordpress-experimental": "^3.3.1",
