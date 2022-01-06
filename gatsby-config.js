@@ -7,6 +7,9 @@
  */
 
 module.exports = {
+  flags: {
+    PARALLEL_QUERY_RUNNING: false,
+  },
   /**
    * Adding plugins to this array adds them to your Gatsby site.
    *
@@ -60,9 +63,10 @@ module.exports = {
     /**
      * New gatsby-plugin-image plugins: https://www.gatsbyjs.com/docs/reference/release-notes/image-migration-guide/
      */
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-gatsby-cloud`,
 
     {
       // See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
