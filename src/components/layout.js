@@ -347,7 +347,7 @@ const Layout = ({ isHomePage, children }) => {
                 <Socials className="social-box">
                   <Link
                     className="social-link"
-                    rel="noopener"
+                    rel="noreferrer"
                     target="_blank"
                     to="https://www.instagram.com/bealtainemagazine/"
                   >
@@ -379,7 +379,7 @@ const Layout = ({ isHomePage, children }) => {
                 <Socials className="social-box">
                   <Link
                     className="social-link"
-                    rel="noopener"
+                    rel="noreferrer"
                     target="_blank"
                     to="https://www.instagram.com/bealtainemagazine/"
                   >
@@ -448,7 +448,7 @@ const Layout = ({ isHomePage, children }) => {
         <div class="info-box ftr-section">
           <p>
             © {new Date().getFullYear()}, website built by{" "}
-            <Link target="_blank" rel="noopener" href="https://roryo.co">
+            <Link target="_blank" rel="noreferrer" href="https://roryo.co">
               Rory O'Connor{" "}
               <span role="img" aria-label="Lightning bolt emoji">
                 ⚡
@@ -459,7 +459,7 @@ const Layout = ({ isHomePage, children }) => {
             {` `}
             <Link
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
               href="https://www.gatsbyjs.com"
             >
               Gatsby.{" "}
@@ -469,7 +469,7 @@ const Layout = ({ isHomePage, children }) => {
             Logo design by{" "}
             <Link
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
               href="https://www.luciamorenomontero.com/"
             >
               Lucia Moreno Montero.
