@@ -5,6 +5,9 @@
  * https://www.gatsbyjs.com/docs/gatsby-config/
  *
  */
+require("dotenv").config({
+  path: `.env`,
+})
 
 module.exports = {
   flags: {
@@ -29,14 +32,14 @@ module.exports = {
       resolve: `gatsby-source-wordpress`,
       options: {
         // the only required plugin option for WordPress is the GraphQL url.
-        url: process.env.WPGRAPHQL_URL || `https://wp.roryo.co/graphql`,
+        url: process.env.WPGRAPHQL_URL,
       },
     },
     {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
         googleAnalytics: {
-          trackingId: "G-QFCGR9L7F0", // leave empty if you want to disable the tracker
+          trackingId: process.env.GOOGLE_ANALYTICS_ID, // leave empty if you want to disable the tracker
           cookieName: "gatsby-gdpr-google-analytics", // default
           anonymize: true, // default
           allowAdFeatures: false, // default
@@ -67,6 +70,14 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-image`,
     `gatsby-plugin-gatsby-cloud`,
+
+    {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        password: process.env.SHOPIFY_SHOP_PASSWORD,
+        storeUrl: process.env.GATSBY_SHOPIFY_STORE_URL,
+      },
+    },
 
     {
       // See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
