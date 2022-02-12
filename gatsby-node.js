@@ -34,6 +34,20 @@ exports.createPages = async gatsbyUtilities => {
     })
   )
 
+  const allProducts = await getProducts(gatsbyUtilities)
+
+  // Iterate over all products and create a new page using a template
+  // The product "handle" is generated automatically by Shopify
+  allProducts.forEach(({ node }) => {
+    gatsbyUtilities.actions.createPage({
+      path: `/shop/${node.handle}`,
+      component: path.resolve(`./src/templates/product.js`),
+      context: {
+        product: node,
+      },
+    })
+  })
+
   // allCats.forEach(function (cat) {
   //   // And a paginated archive
   //   const category = cat.node.slug
@@ -232,4 +246,45 @@ async function getCategories({ graphql, reporter }) {
   }
 
   return [...graphqlResult.data.allWpCategory.edges]
+}
+
+async function getProducts({ graphql, reporter }) {
+  const graphqlResult = await graphql(/* GraphQL */ `
+    query AllProducts {
+      # Query all Shopify products
+      allShopifyProduct(sort: { fields: [title] }) {
+        edges {
+          node {
+            title
+            images {
+              originalSrc
+            }
+            shopifyId
+            handle
+            productType
+            description
+            priceRangeV2 {
+              maxVariantPrice {
+                amount
+              }
+              minVariantPrice {
+                amount
+              }
+            }
+            status
+          }
+        }
+      }
+    }
+  `)
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your blog posts`,
+      graphqlResult.errors
+    )
+    return
+  }
+
+  return [...graphqlResult.data.allShopifyProduct.edges]
 }

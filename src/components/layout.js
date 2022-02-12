@@ -11,10 +11,13 @@ import Drawer from "rc-drawer"
 import "rc-drawer/assets/index.css"
 // Import Swiper styles
 import "swiper/swiper.min.css"
-import { FiMenu, FiInstagram, FiChevronRight } from "react-icons/fi"
+import { FiMenu, FiInstagram, FiTwitter, FiChevronRight } from "react-icons/fi"
 import CookieConsent from "react-cookie-consent"
 // in your cookie banner
 import { useLocation } from "@reach/router" // this helps tracking the location
+import { StoreContext } from "../context/store-context" //shopify context
+import { CartButton } from "./cart-button"
+import { Toast } from "./toast"
 import { initializeAndTrack } from "gatsby-plugin-gdpr-cookies"
 
 // install Swiper components
@@ -166,6 +169,7 @@ const Layout = ({ isHomePage, children }) => {
     flex-flow: row;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     .social-icon {
       font-size: 28px;
@@ -173,6 +177,14 @@ const Layout = ({ isHomePage, children }) => {
       color: #182212;
     }
   `
+
+  const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext)
+
+  const items = checkout ? checkout.lineItems : []
+
+  const quantity = items.reduce((total, item) => {
+    return total + item.quantity
+  }, 0)
 
   const tpLog = topPosts.edges
 
@@ -345,14 +357,35 @@ const Layout = ({ isHomePage, children }) => {
               </div>
               <div className="header-right">
                 <Socials className="social-box">
-                  <Link
-                    className="social-link"
-                    rel="noreferrer"
-                    target="_blank"
-                    to="https://www.instagram.com/bealtainemagazine/"
-                  >
-                    <FiInstagram className="social-icon" />
-                  </Link>
+                  <CartButton quantity={quantity} />
+                  <Toast show={loading || didJustAddToCart}>
+                    {!didJustAddToCart ? (
+                      "Updating…"
+                    ) : (
+                      <>
+                        Added to cart{" "}
+                        <svg
+                          width="14"
+                          height="14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M5.019 10.492l-2.322-3.17A.796.796 0 013.91 6.304L6.628 9.14a1.056 1.056 0 11-1.61 1.351z"
+                            fill="#fff"
+                          />
+                          <path
+                            d="M5.209 10.693a1.11 1.11 0 01-.105-1.6l5.394-5.88a.757.757 0 011.159.973l-4.855 6.332a1.11 1.11 0 01-1.593.175z"
+                            fill="#fff"
+                          />
+                          <path
+                            d="M5.331 7.806c.272.326.471.543.815.163.345-.38-.108.96-.108.96l-1.123-.363.416-.76z"
+                            fill="#fff"
+                          />
+                        </svg>
+                      </>
+                    )}
+                  </Toast>
                 </Socials>
               </div>
             </>
@@ -377,14 +410,35 @@ const Layout = ({ isHomePage, children }) => {
               </div>
               <div className="header-right">
                 <Socials className="social-box">
-                  <Link
-                    className="social-link"
-                    rel="noreferrer"
-                    target="_blank"
-                    to="https://www.instagram.com/bealtainemagazine/"
-                  >
-                    <FiInstagram className="social-icon" />
-                  </Link>
+                  <CartButton quantity={quantity} />
+                  <Toast show={loading || didJustAddToCart}>
+                    {!didJustAddToCart ? (
+                      "Updating…"
+                    ) : (
+                      <>
+                        Added to cart{" "}
+                        <svg
+                          width="14"
+                          height="14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M5.019 10.492l-2.322-3.17A.796.796 0 013.91 6.304L6.628 9.14a1.056 1.056 0 11-1.61 1.351z"
+                            fill="#fff"
+                          />
+                          <path
+                            d="M5.209 10.693a1.11 1.11 0 01-.105-1.6l5.394-5.88a.757.757 0 011.159.973l-4.855 6.332a1.11 1.11 0 01-1.593.175z"
+                            fill="#fff"
+                          />
+                          <path
+                            d="M5.331 7.806c.272.326.471.543.815.163.345-.38-.108.96-.108.96l-1.123-.363.416-.76z"
+                            fill="#fff"
+                          />
+                        </svg>
+                      </>
+                    )}
+                  </Toast>
                 </Socials>
               </div>
             </>
@@ -443,6 +497,24 @@ const Layout = ({ isHomePage, children }) => {
               className="footer-center-logo"
             />
             <h2>Bealtaine Magazine</h2>
+            <div className="footer-socials">
+              <Link
+                className="social-link"
+                rel="noreferrer"
+                target="_blank"
+                to="https://www.instagram.com/bealtainemagazine/"
+              >
+                <FiInstagram className="social-icon" />
+              </Link>
+              <Link
+                className="social-link"
+                rel="noreferrer"
+                target="_blank"
+                to="https://twitter.com/bealtainemag"
+              >
+                <FiTwitter className="social-icon" />
+              </Link>
+            </div>
           </div>
         </div>
         <div class="info-box ftr-section">

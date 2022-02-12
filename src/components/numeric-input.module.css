@@ -1,0 +1,102 @@
+.wrap {
+  display: inline-grid;
+  grid-template-columns: 1fr min-content;
+  grid-template-areas: "input increment" "input decrement";
+  background-color: #f2f4f4;
+  border-radius: 5px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.wrap button span {
+  display: none;
+}
+
+.input {
+  grid-area: input;
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  align-self: stretch;
+  width: 6ch;
+  border-style: solid;
+  border-color: #ddd;
+  border-width: 0 1px 0 0;
+  font-weight: bold;
+  color: black;
+}
+
+.input:disabled {
+  color: gray;
+}
+
+.wrap button {
+  background: none;
+  border: none;
+  padding: 0 10px;
+  display: grid;
+  place-items: center;
+  color: #ccc;
+}
+
+.wrap button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: black;
+}
+
+.wrap button:disabled:hover,
+.wrap button:disabled {
+  background: none;
+  color: gray;
+}
+
+.wrap button.increment {
+  grid-area: increment;
+  border-bottom: 1px rgba(0, 0, 0, 0.05) solid;
+}
+
+.decrement {
+  grid-area: decrement;
+}
+
+/* On mobile, make the buttons easier to press */
+@media (pointer: coarse) {
+  .wrap {
+    grid-template-columns: 50px 1fr 50px;
+    grid-template-areas: "decrement input increment";
+    color: black;
+  }
+
+  .input {
+    text-align: center;
+    border-width: 0 1px;
+  }
+
+  .wrap button {
+    padding: 0 8px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .wrap button span {
+    display: inline;
+  }
+
+  .wrap button svg {
+    display: none;
+  }
+
+  .wrap button.increment {
+    border: none;
+  }
+
+  .wrap button:active {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: black;
+  }
+
+  .wrap button:hover {
+    background-color: inherit;
+    color: inherit;
+  }
+}
