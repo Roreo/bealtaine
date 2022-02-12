@@ -59,10 +59,17 @@
   grid-area: decrement;
 }
 
+@media (max-width: 768px) {
+  .input {
+    width: 3ch;
+    padding: 0px;
+  }
+}
+
 /* On mobile, make the buttons easier to press */
 @media (pointer: coarse) {
   .wrap {
-    grid-template-columns: 50px 1fr 50px;
+    grid-template-columns: 30px 1fr 30px;
     grid-template-areas: "decrement input increment";
     color: black;
   }
@@ -73,7 +80,7 @@
   }
 
   .wrap button {
-    padding: 0 8px;
+    padding: 0 0px;
     font-size: 18px;
     font-weight: bold;
   }
