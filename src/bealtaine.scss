@@ -1383,12 +1383,13 @@ a.more-link {
       margin: 0 auto;
       margin-top: 90px;
       margin-bottom: 25px;
+      font-weight: bold;
 
       svg {
         width: 100%;
         z-index: -1;
         position: absolute;
-        top: -80%;
+        top: -90%;
         left: 0;
         margin-left: 0%;
       }
