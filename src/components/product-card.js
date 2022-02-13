@@ -10,7 +10,6 @@ export function ProductCard({ product, eager }) {
     priceRangeV2,
     handle,
     images: [firstImage],
-    vendor,
     storefrontImages,
   } = product
 

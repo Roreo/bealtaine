@@ -6,19 +6,15 @@ import { LineItem } from "../components/line-item"
 import { formatPrice } from "../utils/format-price"
 import {
   table,
-  wrap,
   totals,
   grandTotal,
   summary,
-  checkoutButton,
   collapseColumn,
   labelColumn,
   imageHeader,
   productHeader,
   emptyStateContainer,
   emptyStateHeading,
-  emptyStateLink,
-  title,
 } from "./cart.module.css"
 
 export default function CartPage() {

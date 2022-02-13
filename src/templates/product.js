@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import isEqual from "lodash.isequal"
 import { GatsbyImage, getSrc } from "gatsby-plugin-image"
@@ -8,11 +8,9 @@ import { AddToCart } from "../components/add-to-cart"
 import { NumericInput } from "../components/numeric-input"
 import { formatPrice } from "../utils/format-price"
 import Seo from "../components/seo"
-import { FiChevronRight as ChevronIcon } from "react-icons/fi"
 
 export default function Product({ data: { product, suggestions } }) {
   const {
-    options,
     variants,
     variants: [initialVariant],
     priceRangeV2,
@@ -33,7 +31,7 @@ export default function Product({ data: { product, suggestions } }) {
     productVariant.availableForSale
   )
 
-  const checkAvailablity = React.useCallback(
+  const checkAvailability = React.useCallback(
     productId => {
       client.product.fetch(productId).then(fetchedProduct => {
         const result =
@@ -71,17 +69,15 @@ export default function Product({ data: { product, suggestions } }) {
   }
 
   React.useEffect(() => {
-    checkAvailablity(product.storefrontId)
-  }, [productVariant.storefrontId, checkAvailablity, product.storefrontId])
+    checkAvailability(product.storefrontId)
+  }, [productVariant.storefrontId, checkAvailability, product.storefrontId])
 
   const price = formatPrice(
     priceRangeV2.minVariantPrice.currencyCode,
     variant.price
   )
 
-  const hasVariants = variants.length > 1
   const hasImages = images.length > 0
-  const hasMultipleImages = true || images.length > 1
 
   return (
     <Layout>
