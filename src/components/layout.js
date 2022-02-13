@@ -64,12 +64,7 @@ const Layout = ({ isHomePage, children }) => {
       }
       footer: file(relativePath: { eq: "bfooter.png" }) {
         childImageSharp {
-          gatsbyImageData(
-            width: 1920
-            quality: 100
-            placeholder: BLURRED
-            layout: FULL_WIDTH
-          )
+          gatsbyImageData(quality: 100, placeholder: NONE, layout: FIXED)
         }
       }
       footer_logo: file(relativePath: { eq: "footer_logo.png" }) {

@@ -118,13 +118,17 @@ footer {
   padding: 0;
   position: relative;
   flex-flow: column;
-  height: auto;
+  height: 500px;
   margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   margin-bottom: 0;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 
   .footer-socials {
     a {
@@ -139,8 +143,8 @@ footer {
   }
 
   .footer-bg-img {
-    height: 100%;
-    width: 100vw;
+    min-height: 100%;
+    max-width: 100vw;
     position: absolute !important;
     object-fit: cover;
     z-index: -1;
@@ -155,7 +159,7 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 30px;
-    height: 100%;
+    height: 70%;
     width: 100%;
     padding: 35px 0px 25px 0px;
 
