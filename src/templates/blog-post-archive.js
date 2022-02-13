@@ -116,7 +116,7 @@ const BlogIndex = ({
                   {/* if we have a featured image for this post let's display it */}
                   {listingImage?.fluid ? (
                     <GatsbyImage
-                      image={listingImage.gatsbyImageData}
+                      image={listingImage.fluid}
                       className="article-img"
                       alt={listingImage.alt}
                       style={{ marginBottom: 50 }}

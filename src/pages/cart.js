@@ -4,6 +4,7 @@ import Layout from "../components/layout"
 import { StoreContext } from "../context/store-context"
 import { LineItem } from "../components/line-item"
 import { formatPrice } from "../utils/format-price"
+import Ghost from "../../content/assets/ghostB.svg"
 import {
   table,
   totals,
@@ -30,6 +31,11 @@ export default function CartPage() {
       <div className={"cart-wrap"}>
         {emptyCart ? (
           <div className={emptyStateContainer}>
+            <img
+              className="ghost-b"
+              src={Ghost}
+              alt="Bealtaine logo with faded B"
+            ></img>
             <h1 className={emptyStateHeading}>Your cart is currently empty</h1>
             <p>Check out our shop for some amazing products:</p>
             <Link to="/shop" className={"emptyStateLink"}>
