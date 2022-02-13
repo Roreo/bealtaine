@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import { FiShoppingBag } from "react-icons/fi"
-import { cartButton, badge } from "./cart-button.module.css"
 
 export function CartButton({ quantity }) {
   return (

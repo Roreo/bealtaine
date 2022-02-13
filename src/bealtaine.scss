@@ -298,10 +298,6 @@ footer {
   }
 }
 
-body.no-scroll {
-  // overflow: hidden;
-}
-
 .swiper-custom {
   @media (max-width: 768px) {
     .swiper-button-prev,
@@ -1279,9 +1275,6 @@ a.more-link {
       padding-right: 20px;
       opacity: 0.8;
     }
-  }
-
-  .productImageWrapper {
   }
 
   .productImageList {
