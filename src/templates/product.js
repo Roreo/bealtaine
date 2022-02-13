@@ -17,6 +17,7 @@ export default function Product({ data: { product, suggestions } }) {
     variants: [initialVariant],
     priceRangeV2,
     title,
+    descriptionHtml,
     description,
     images,
     images: [firstImage],
@@ -83,6 +84,10 @@ export default function Product({ data: { product, suggestions } }) {
 
   const isMobile = useMediaQuery({ query: "(max-width: 992px)" })
 
+  function createMarkup() {
+    return { __html: descriptionHtml }
+  }
+
   return (
     <Layout>
       {firstImage ? (
@@ -128,7 +133,10 @@ export default function Product({ data: { product, suggestions } }) {
           )}
           <div className="contentBox">
             <h1 className={"header"}>{title}</h1>
-            <p className={"productDescription"}>{description}</p>
+            <p
+              className={"productDescription"}
+              dangerouslySetInnerHTML={createMarkup()}
+            ></p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"
@@ -216,6 +224,7 @@ export const query = graphql`
   query {
     product: shopifyProduct {
       title
+      descriptionHtml
       description
       productType
       handle
