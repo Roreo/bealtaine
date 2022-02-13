@@ -1,12 +1,14 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import { Toast } from "../components/toast"
 import isEqual from "lodash.isequal"
 import { GatsbyImage, getSrc } from "gatsby-plugin-image"
 import { StoreContext } from "../context/store-context"
 import { AddToCart } from "../components/add-to-cart"
 import { NumericInput } from "../components/numeric-input"
 import { formatPrice } from "../utils/format-price"
+import { useMediaQuery } from "react-responsive"
 import Seo from "../components/seo"
 
 export default function Product({ data: { product, suggestions } }) {
@@ -19,7 +21,7 @@ export default function Product({ data: { product, suggestions } }) {
     images,
     images: [firstImage],
   } = product
-  const { client } = React.useContext(StoreContext)
+  const { client, loading, didJustAddToCart } = React.useContext(StoreContext)
 
   const [variant, setVariant] = React.useState({ ...initialVariant })
   const [quantity, setQuantity] = React.useState(1)
@@ -78,6 +80,8 @@ export default function Product({ data: { product, suggestions } }) {
   )
 
   const hasImages = images.length > 0
+
+  const isMobile = useMediaQuery({ query: "(max-width: 992px)" })
 
   return (
     <Layout>
@@ -171,6 +175,36 @@ export default function Product({ data: { product, suggestions } }) {
               quantity={quantity}
               available={available}
             />
+            {isMobile && (
+              <Toast show={loading || didJustAddToCart}>
+                {!didJustAddToCart ? (
+                  "Updating…"
+                ) : (
+                  <>
+                    Added to cart{" "}
+                    <svg
+                      width="14"
+                      height="14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5.019 10.492l-2.322-3.17A.796.796 0 013.91 6.304L6.628 9.14a1.056 1.056 0 11-1.61 1.351z"
+                        fill="#fff"
+                      />
+                      <path
+                        d="M5.209 10.693a1.11 1.11 0 01-.105-1.6l5.394-5.88a.757.757 0 011.159.973l-4.855 6.332a1.11 1.11 0 01-1.593.175z"
+                        fill="#fff"
+                      />
+                      <path
+                        d="M5.331 7.806c.272.326.471.543.815.163.345-.38-.108.96-.108.96l-1.123-.363.416-.76z"
+                        fill="#fff"
+                      />
+                    </svg>
+                  </>
+                )}
+              </Toast>
+            )}
           </div>
         </div>
       </div>
