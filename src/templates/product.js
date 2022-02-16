@@ -11,7 +11,7 @@ import { formatPrice } from "../utils/format-price"
 import { useMediaQuery } from "react-responsive"
 import Seo from "../components/seo"
 
-export default function Product({ data: { product, suggestions } }) {
+export default function Product({ data: { product } }) {
   const {
     variants,
     variants: [initialVariant],
@@ -133,10 +133,7 @@ export default function Product({ data: { product, suggestions } }) {
           )}
           <div className="contentBox">
             <h1 className={"header"}>{title}</h1>
-            <p
-              className={"productDescription"}
-              dangerouslySetInnerHTML={createMarkup()}
-            ></p>
+            <p className={"productDescription"}>{description}</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"
