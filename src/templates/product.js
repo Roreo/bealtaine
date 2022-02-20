@@ -10,6 +10,7 @@ import { NumericInput } from "../components/numeric-input"
 import { formatPrice } from "../utils/format-price"
 import { useMediaQuery } from "react-responsive"
 import Seo from "../components/seo"
+import ReactHtmlParser from "react-html-parser"
 
 export default function Product({ data: { product } }) {
   const {
@@ -84,10 +85,6 @@ export default function Product({ data: { product } }) {
 
   const isMobile = useMediaQuery({ query: "(max-width: 992px)" })
 
-  function createMarkup() {
-    return { __html: descriptionHtml }
-  }
-
   return (
     <Layout>
       {firstImage ? (
@@ -133,7 +130,9 @@ export default function Product({ data: { product } }) {
           )}
           <div className="contentBox">
             <h1 className={"header"}>{title}</h1>
-            <p className={"productDescription"}>{description}</p>
+            <p className={"productDescription"}>
+              {ReactHtmlParser(descriptionHtml)}
+            </p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"
