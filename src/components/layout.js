@@ -80,7 +80,7 @@ const Layout = ({ isHomePage, children }) => {
       topPosts: allWpPost(
         filter: { top_post: { topPost: { eq: true } } }
         limit: 3
-        sort: { fields: date, order: DESC }
+        sort: { fields: top_post___postOrder, order: ASC }
       ) {
         edges {
           node {
@@ -90,6 +90,7 @@ const Layout = ({ isHomePage, children }) => {
             top_post {
               description
               customLink
+              postOrder
               tpImage {
                 altText
                 localFile {
