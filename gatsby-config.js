@@ -66,9 +66,9 @@ module.exports = {
     /**
      * New gatsby-plugin-image plugins: https://www.gatsbyjs.com/docs/reference/release-notes/image-migration-guide/
      */
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-image`,
     `gatsby-plugin-gatsby-cloud`,
 
     {
