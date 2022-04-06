@@ -610,6 +610,9 @@ a.more-link {
         width: 65px;
         top: 63px;
         left: 40px;
+        img {
+          width: 65px;
+        }
       }
       .author-img {
         position: absolute;
@@ -816,7 +819,6 @@ a.more-link {
     height: 100%;
     object-fit: cover;
     object-position: center center;
-    z-index: -1;
     & > img {
       transition: all 0.5s !important;
       margin: 0;
