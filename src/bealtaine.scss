@@ -657,6 +657,12 @@ a.more-link {
         transform: scale(1.06);
       }
     }
+
+    .lazy-image {
+      img {
+        transform: scale(1.06);
+      }
+    }
   }
 
   &.no-img-article {
@@ -805,6 +811,14 @@ a.more-link {
   }
 
   .lazy-image {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+  & > img {
+    transition: all 0.5s !important;
     margin: 0;
     width: 100%;
     height: 100%;
