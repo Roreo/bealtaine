@@ -1,5 +1,5 @@
 import * as React from "react"
-import { StoreContext } from "../context/store-context"
+import { StoreContext } from "../../context/store-context"
 
 export function AddToCart({ variantId, quantity, available, ...props }) {
   const { addVariantToCart, loading } = React.useContext(StoreContext)

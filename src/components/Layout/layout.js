@@ -1,8 +1,8 @@
 import React, { useState } from "react"
+import "../../styles/bealtaine.scss"
+import styled from "styled-components/macro"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import styled from "styled-components/macro"
-import "../bealtaine.scss"
 // import Swiper core and required components
 import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper"
 // Import Swiper React components
@@ -15,9 +15,9 @@ import { FiMenu, FiInstagram, FiTwitter, FiChevronRight } from "react-icons/fi"
 import CookieConsent from "react-cookie-consent"
 // in your cookie banner
 import { useLocation } from "@reach/router" // this helps tracking the location
-import { StoreContext } from "../context/store-context" //shopify context
-import { CartButton } from "./cart-button"
-import { Toast } from "./toast"
+import { StoreContext } from "../../context/store-context" //shopify context
+import { CartButton } from "../CartButton/cart-button"
+import { Toast } from "../Toast/toast"
 import { initializeAndTrack } from "gatsby-plugin-gdpr-cookies"
 
 // install Swiper components

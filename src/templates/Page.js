@@ -1,4 +1,5 @@
 import React from "react"
+import Layout from "../components/Layout/layout"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import parse from "html-react-parser"
@@ -8,8 +9,7 @@ import "@wordpress/block-library/build-style/style.css"
 import "@wordpress/block-library/build-style/theme.css"
 
 // import Bio from "../components/bio"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Seo from "../components/Seo/seo"
 
 const PageTemplate = ({ data: { previous, next, post } }) => {
   const featuredImage = {

@@ -1,12 +1,12 @@
 import React from "react"
+import Layout from "../components/Layout/layout"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import parse from "html-react-parser"
 // We're using Gutenberg so we need the block styles
 import "@wordpress/block-library/build-style/style.css"
 import "@wordpress/block-library/build-style/theme.css"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Seo from "../components/Seo/seo"
 
 const BlogPostTemplate = ({ data: { previous, next, post } }) => {
   const featuredImage = {

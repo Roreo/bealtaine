@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ProductCard } from "./product-card"
+import { ProductCard } from "../ProductCard/product-card"
 
 // To optimize LCP we mark the first product card as eager so the image gets loaded faster
 export function ProductListing({ products = [] }) {

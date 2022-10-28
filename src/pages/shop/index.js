@@ -1,8 +1,8 @@
 import * as React from "react"
+import Layout from "../../components/Layout/layout"
 import { graphql } from "gatsby"
-import Layout from "../../components/layout"
-import { ProductListing } from "../../components/product-listing"
-import Seo from "../../components/seo"
+import { ProductListing } from "../../components/ProductListing/product-listing"
+import Seo from "../../components/Seo/seo"
 
 export default function Products({ data: { products } }) {
   return (

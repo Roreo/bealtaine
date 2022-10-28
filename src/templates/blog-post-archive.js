@@ -1,9 +1,9 @@
 import React from "react"
+import Layout from "../components/Layout/layout"
 import { Link, graphql } from "gatsby"
 import parse from "html-react-parser"
 import { GatsbyImage } from "gatsby-plugin-image"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Seo from "../components/Seo/seo"
 import Ghost from "../../content/assets/ghostB.svg"
 
 const BlogIndex = ({

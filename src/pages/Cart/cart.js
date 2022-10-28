@@ -1,10 +1,10 @@
 import * as React from "react"
+import Layout from "../../components/Layout/layout"
 import { Link } from "gatsby"
-import Layout from "../components/layout"
-import { StoreContext } from "../context/store-context"
-import { LineItem } from "../components/line-item"
-import { formatPrice } from "../utils/format-price"
-import Ghost from "../../content/assets/ghostB.svg"
+import { StoreContext } from "../../context/store-context"
+import { LineItem } from "../../components/LineItem/line-item"
+import { formatPrice } from "../../utils/format-price"
+import Ghost from "../../../content/assets/ghostB.svg"
 import {
   table,
   totals,

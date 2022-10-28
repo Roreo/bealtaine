@@ -80,7 +80,7 @@ const SEO = ({ description, lang, meta, title }) => {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  description: `Independent E-zine Celebrating Literature and Arts`,
+  description: `Independent Irish magazine Celebrating Literature and Arts`,
 }
 
 SEO.propTypes = {
