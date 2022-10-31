@@ -657,13 +657,13 @@ a.more-link {
     .article-img,
     .inline-gatsby-image-wrapper span {
       img {
-        transform: scale(1.06);
+        transform: scale(1.06) !important;
       }
     }
 
     .lazy-image {
       img {
-        transform: scale(1.06);
+        transform: scale(1.06) !important;
       }
     }
   }
@@ -1227,7 +1227,7 @@ a.more-link {
       text-decoration: none;
 
       img {
-        transform: scale(1.06);
+        transform: scale(1.06) !important;
       }
     }
   }
